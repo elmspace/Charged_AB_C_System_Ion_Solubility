@@ -6,7 +6,8 @@ void MOD_main_Vcritical_vs_PA(double ***w, double ***phi, double **psi, double *
   outputFile37.close();
   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   
-  double fE_Par, fE_Per;
+  double fE_Par = 0.0;
+  double  fE_Per=0.0;
   double delV, delPA;
   double V_critical;
   double PA_limit;
@@ -79,7 +80,7 @@ void MOD_main_Vcritical_vs_PA(double ***w, double ***phi, double **psi, double *
 
       std::cout<<"delV="<<psi_bc_1<<" "<<"  delfE="<<fE_Par-fE_Per<<" "<<"  tau="<<tau<<std::endl;
       
-    }while(fE_par<fE_per);
+    }while(fE_Par<fE_Per);
     std::cout<<"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"<<std::endl;
     
     // Setting the critical Voltage

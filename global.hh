@@ -31,6 +31,7 @@ int MIX;                        // Mixed confuration, with parrallel and perpend
 int Initial_Read;
 
 double tau; // This is the tau from the theory
+double mu; // Surface interaction
 double NAB,f,pot_diff;
 double kA,kB,PA;        
 double pAave, pBave, pIave;

@@ -1,7 +1,6 @@
 void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, double **chiMatrix, double ***x_sub){
   
   int i,j;
-  double mu; // Surface interaction
   double tt; // This is for convergence of BP solver
 
   // Set to 1 to minimize box size and 0 to not
@@ -29,7 +28,7 @@ void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, dou
   psi_bc_2=0.0; // Will be kept at zero all the time
 
   // This is the surface interaction with substrate if - then B is attracted to substrate, if + then A is attracted
-  mu=1.0;
+  mu=-1.0;
 
   if((mu<0.0)&&(PAR_AS==1)){std::cout<<"Your initial condition and this parameter dont match."<<std::endl;}
   if((mu>0.0)&&(PAR_BS==1)){std::cout<<"Your initial condition and this parameter dont match."<<std::endl;}

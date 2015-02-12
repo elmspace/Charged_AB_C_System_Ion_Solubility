@@ -30,6 +30,8 @@ Written By:   Ashkan Dehghan [McMaster University]
 
 #include "./MODS/MOD_main.hh"
 #include "./MODS/MOD_main_delfE_vs_delV.hh"
+#include "./MODS/MOD_main_Vcritical_vs_PA.hh"
+#include "./MODS/MOD_main_Vcritical_vs_mu.hh"
 
 using namespace std;
 
@@ -87,8 +89,8 @@ int main(){
   
 
   //MOD_main(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
-  MOD_main_delfE_vs_delV(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
-  //MOD_main_Vcritical_vs_PA(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
+  //MOD_main_delfE_vs_delV(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
+  MOD_main_Vcritical_vs_PA(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
   //MOD_main_Vcritical_vs_mu(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
   
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

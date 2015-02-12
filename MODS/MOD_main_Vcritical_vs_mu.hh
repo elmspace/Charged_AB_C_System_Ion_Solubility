@@ -85,7 +85,7 @@ void MOD_main_Vcritical_vs_mu(double ***w, double ***phi, double **psi, double *
 
       std::cout<<"delV="<<psi_bc_1<<" "<<"  delfE="<<fE_Par-fE_Per<<" "<<"  tau="<<tau<<std::endl;
       
-    }while(fE_par<fE_per);
+    }while(fE_Par<fE_Per);
     std::cout<<"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"<<std::endl;
     
     // Setting the critical Voltage
