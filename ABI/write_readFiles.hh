@@ -5,30 +5,38 @@ void Write_Omega(double ***w){
   int i, j;
 
 
-  if(PAR==1){
-    std::ofstream outputFile1("./OMEGA/PAR.read"); // Format: x, y, wA, wB, wI, w_e
+  if(PAR_AS==1){
+    std::ofstream outputFile1("./OMEGA/PAR_AS.read"); // Format: x, y, wA, wB, wI, w_e
     for(i=0;i<Nx;i++){
       for(j=0;j<Ny;j++){
 	outputFile1 << i <<" "<< j <<" "<< w[0][i][j] <<" "<< w[1][i][j] <<" "<<w[2][i][j]<<" "<<w[3][i][j]<<std::endl;
       }
     }
-    outputFile1.close(); 
-  }else if(PER==1){
-    std::ofstream outputFile2("./OMEGA/PER.read"); // Format: x, y, wA, wB, wI, w_e
+    outputFile1.close();
+  }else if(PAR_BS==1){
+    std::ofstream outputFile2("./OMEGA/PAR_BS.read"); // Format: x, y, wA, wB, wI, w_e
     for(i=0;i<Nx;i++){
       for(j=0;j<Ny;j++){
 	outputFile2 << i <<" "<< j <<" "<< w[0][i][j] <<" "<< w[1][i][j] <<" "<<w[2][i][j]<<" "<<w[3][i][j]<<std::endl;
       }
     }
-    outputFile2.close();
-  }else if(MIX==1){
-    std::ofstream outputFile3("./OMEGA/MIX.read"); // Format: x, y, wA, wB, wI, w_e
+    outputFile2.close(); 
+  }else if(PER==1){
+    std::ofstream outputFile3("./OMEGA/PER.read"); // Format: x, y, wA, wB, wI, w_e
     for(i=0;i<Nx;i++){
       for(j=0;j<Ny;j++){
 	outputFile3 << i <<" "<< j <<" "<< w[0][i][j] <<" "<< w[1][i][j] <<" "<<w[2][i][j]<<" "<<w[3][i][j]<<std::endl;
       }
     }
     outputFile3.close();
+  }else if(MIX==1){
+    std::ofstream outputFile4("./OMEGA/MIX.read"); // Format: x, y, wA, wB, wI, w_e
+    for(i=0;i<Nx;i++){
+      for(j=0;j<Ny;j++){
+	outputFile4 << i <<" "<< j <<" "<< w[0][i][j] <<" "<< w[1][i][j] <<" "<<w[2][i][j]<<" "<<w[3][i][j]<<std::endl;
+      }
+    }
+    outputFile4.close();
   }else{
     std::cout<<"No structure was chosen, no file is being writen."<<std::endl;
   }

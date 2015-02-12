@@ -9,12 +9,7 @@ void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, dou
 
   // 0=read 1=set manually 2=random
   Iomega=1;
-
-  // Setting the structure 1=on 0=off
-  PER=0; // perpendicular
-  PAR=1; // parallel
-  MIX=0; // mixed
-  
+ 
   // Initial_Read is if there is already a .read file for the structre
   Initial_Read=0; // 1=yes 0=no
 
@@ -23,7 +18,7 @@ void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, dou
   kB=2.5;
   
   // Charge percentage 1e-10 is 0
-  PA=0.0000000001;
+  PA=0.001;
 
   // This is for convering the BP solver
   tt=cos(Pi/Nx)+cos(Pi/Ny);
@@ -33,9 +28,12 @@ void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, dou
   psi_bc_1=0.0;
   psi_bc_2=0.0; // Will be kept at zero all the time
 
-  // This is the surface interaction with substrate
-  mu=-1.0;
+  // This is the surface interaction with substrate if - then B is attracted to substrate, if + then A is attracted
+  mu=1.0;
 
+  if((mu<0.0)&&(PAR_AS==1)){std::cout<<"Your initial condition and this parameter dont match."<<std::endl;}
+  if((mu>0.0)&&(PAR_BS==1)){std::cout<<"Your initial condition and this parameter dont match."<<std::endl;}
+  
   
   // Degree of polymerization
   Ns[0]=50;               // A
@@ -47,7 +45,7 @@ void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, dou
   //tau=(e*e*Kuhn*Kuhn*4.0*Pi*rho_0)/(eps_0*K_Boltz*Temp);  // This is Michael's definition of the tau parameter
   //std::cout<<"tau= "<<tau<<std::endl;
   tau=(e*e)/(eps_0*K_Boltz*Temp*Kuhn); // This is according to An-Chang's paper
-  std::cout<<"tau= "<<tau<<std::endl;
+  //std::cout<<"tau= "<<tau<<std::endl;
  
 
 

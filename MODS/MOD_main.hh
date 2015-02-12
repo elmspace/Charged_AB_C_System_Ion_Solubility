@@ -3,6 +3,12 @@ void MOD_main(double ***w, double ***phi, double **psi, double **eta, double **d
   double FE;
 
 
+  // Setting the structure 1=on 0=off
+  PER=0;                         // perpendicular
+  PAR_AS=1;                     // Parallel configuration, with A attracted to the substrate
+  PAR_BS=0;                     // Parallel configuration, with B attrcated to the substrate
+  MIX=0;                        // mixed
+  
   parametersAB(chi,f,ds,Ns,dxy,chiMatrix,x_sub);
   omega(w);
   

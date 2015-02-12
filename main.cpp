@@ -1,3 +1,13 @@
+/*
+
+This program solve the modified diffusion equations and Boltmann-Poisson equation in 2D
+For a AB diblock copolymers with a negatively charged A-block and neutral B-block
+There are also positive ions in the system, so the system is globally charge neutral
+
+
+Written By:   Ashkan Dehghan [McMaster University]
+
+*/
 #include "./global.hh"
 #include "./ABI/parametersABI.hh"
 #include "./ABI/WaveVectors.hh"
@@ -78,7 +88,8 @@ int main(){
 
   //MOD_main(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
   MOD_main_delfE_vs_delV(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
-
+  //MOD_main_Vcritical_vs_PA(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
+  //MOD_main_Vcritical_vs_mu(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
   
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -109,16 +120,23 @@ int main(){
 }
 
 
-
+// INFO ++++++++++++++++++++
 /*
 
 MOD_main ---> This is a simple mod, which will use the parameters in the parameters.hh to run one calculation
+
 
 MOD_main_delfE_vs_delV ---> This mod will compare the free energy of the parallel to the perpendicular for a given parameter set as a function of voltage.
                             The final output would be a plot of delF vs delV
 
 
+MOD_main_Vcritical_vs_PA ---> This mod will run over different configuration for a set of parameters and compare their free energy for a given voltage. At the critical voltage where the 
+                              perpendicular configuration is more favarable, it will terminate and starts scanning for Vcritical for a different PA value. The final product would be a 
+                              a function of Vcritical vs PA
 
+MOD_main_Vcritical_vs_mu ---> This mod will run over different configuration for a set of parameters and compare their free energy for a given voltage. At the critical voltage where the 
+                              perpendicular configuration is more favarable, it will terminate and starts scanning for Vcritical for a different mu value. The final product would be a 
+                              a function of Vcritical vs mu (here mu is the interaction strength between the A/B and substrates)
 
 
  */

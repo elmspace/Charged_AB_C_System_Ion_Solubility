@@ -22,11 +22,13 @@ void omega(double ***w){
 
     std::ifstream infile;
     if(Initial_Read==1){
-      if(PAR==1){infile.open("./OMEGA/Initial/PAR.read");}
+      if(PAR_AS==1){infile.open("./OMEGA/Initial/PAR_AS.read");}
+      if(PAR_BS==1){infile.open("./OMEGA/Initial/PAR_BS.read");}
       if(PER==1){infile.open("./OMEGA/Initial/PER.read");}
       if(MIX==1){infile.open("./OMEGA/Initial/MIX.read");}
     }else{
-      if(PAR==1){infile.open("./OMEGA/PAR.read");}
+      if(PAR_AS==1){infile.open("./OMEGA/PAR_AS.read");}
+      if(PAR_BS==1){infile.open("./OMEGA/PAR_BS.read");}
       if(PER==1){infile.open("./OMEGA/PER.read");}
       if(MIX==1){infile.open("./OMEGA/MIX.read");}
     }
@@ -40,7 +42,14 @@ void omega(double ***w){
     
   }else if(Iomega==1){//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Manually setting the fields
 
-    if(PAR==1){
+    if(PAR_AS==1){
+      for(i=0;i<Nx;i++){
+	for(j=0;j<Ny;j++){
+	  w[0][i][j]=-10.0*cos(4.0*Pi*i/Nx);
+	  w[1][i][j]=10.0*cos(4.0*Pi*i/Nx);
+	}
+      }
+    }else if(PAR_BS==1){
       for(i=0;i<Nx;i++){
 	for(j=0;j<Ny;j++){
 	  w[1][i][j]=-10.0*cos(4.0*Pi*i/Nx);

@@ -24,7 +24,10 @@ using namespace std;
 
 int box_min;
 int Iomega;
-int PAR, PER, MIX;
+int PAR_AS;                     // Parallel configuration, with A attracted to the substrate
+int PAR_BS;                     // Parallel configuration, with B attrcated to the substrate
+int PER;                        // Perpendicular configuration
+int MIX;                        // Mixed confuration, with parrallel and perpendicular
 int Initial_Read;
 
 double tau; // This is the tau from the theory
