@@ -26,7 +26,7 @@ void MOD_main_Vcritical_vs_PA(double ***w, double ***phi, double **psi, double *
   //+++++++++++++++++++++++++++++++++++
   
   // Setting the del parameters (step sizes)
-  delV=2.5;
+  delV=0.5;
   delPA=5.0e-5; // 20 steps from 0 to PALimit
   //+++++++++++++++++++++++++++++++++++
 
