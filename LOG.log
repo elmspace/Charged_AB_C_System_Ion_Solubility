@@ -1,0 +1,14 @@
+LOG
+________________
+This where I note the daily attempts and information. What I have tried, what I need to fixed so on.
+
+Written By: Ashkan Dehghan [McMaster University]
+________________
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Feb 16 2015 9:53 AM
+
+The code at the moment compiles. I have written a few Mod files to do calculations for different combination of parameters.
+They compile, but I need to make sure that in the long run they produce the correct the results.
+I will be doing some testing now.
+
