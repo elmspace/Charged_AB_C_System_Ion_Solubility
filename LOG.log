@@ -12,3 +12,33 @@ The code at the moment compiles. I have written a few Mod files to do calculatio
 They compile, but I need to make sure that in the long run they produce the correct the results.
 I will be doing some testing now.
 
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Feb 16 2015 12:04 PM
+
+Still have not solved the problem. I am comparing the MOD_main_Vcritical_vs_PA results with the previous calculations and they do not match exactly.
+
+Looking to find why they don’t match.
+doing more tests.
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Feb 16 2015 1:26 PM
+
+Still getting weird results.
+I think the problem is with the Box minimization algorithm.
+The problem is that the free energy depends on where we start from, V=0 or some V=v, this should not be the case.
+I will be looking into that, and be doing some testing with that.
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Feb 16 2015 4:37 PM
+
+I fixed the main problem.
+The problem was that if PA is changing, since pIave depends on PA, then pIave should also be updated.
+The problem with the start position is still there, although it is minor now.
+Will look into fixing the problem completely.
+Also, I will write a function for finding the intersection between the deltafE and the f(x)=0 to find an accurate V_critical.
+I have written the function, testing it now.
+It works perfectly.  :)

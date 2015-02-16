@@ -6,10 +6,9 @@
 #include <math.h>      //Use the math function libraries
 #include <time.h>      //Call system time libraries to define the integer seed for random numbers
 #include "./include/smemory.hh"  //Use my custom memory handling class
-//#include </usr/local/include/fftw3.h>
-#include </opt/sharcnet/fftw/3.3.2/intel/include/fftw3.h> // This is for Sharcnet                                                        
+//#include </opt/sharcnet/fftw/3.3.2/intel/include/fftw3.h> // This is for Sharcnet                                                        
 //#include </usr/include/fftw3.h> // This is for use on Landua                                                                           
-//#include </usr/local/include/fftw3.h> // This is for local use (My MacBookPro)
+#include </usr/local/include/fftw3.h> // This is for local use (My MacBookPro)
 using namespace std;
 
 #define Nx 32

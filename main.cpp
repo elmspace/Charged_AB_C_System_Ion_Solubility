@@ -9,6 +9,7 @@ Written By:   Ashkan Dehghan [McMaster University]
 
 */
 #include "./global.hh"
+#include "./ABI/tools.hh"
 #include "./ABI/parametersABI.hh"
 #include "./ABI/WaveVectors.hh"
 #include "./ABI/omega.hh"
