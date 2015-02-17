@@ -37,13 +37,18 @@ pause(-1)
 
 reset
 unset key
-set y2tics
+unset y2tics
+
    set xr [0.0 : 7.8]
- set yr [-0.001 : 0.001]
+ set yr [-0.001 : 0.005]
+
+   f(x)=0.0
    
-plot "/Users/ashkandehghan/Desktop/SCFT_CODES/AB_Charged_ThinFilm/PHI/phi1Dx.dat" using 1:4 axes x1y2 w lp lw 3,\
-"/Users/ashkandehghan/Desktop/SCFT_CODES/AB_Charged_ThinFilm/PHI/phi1Dx.dat" using 1:5 axes x1y2 w lp lw 3,\
-   "/Users/ashkandehghan/Desktop/SCFT_CODES/AB_Charged_ThinFilm/PHI/phi1Dx.dat" using 1:6 axes x1y1 w lp lw 3
+plot f(x) w l lt -1,\
+   "/Users/ashkandehghan/Desktop/SCFT_CODES/AB_Charged_ThinFilm/PHI/phi1Dx.dat" using 1:2 axes x1y2 w lp lw 3 lt 1,\
+"/Users/ashkandehghan/Desktop/SCFT_CODES/AB_Charged_ThinFilm/PHI/phi1Dx.dat" using 1:3 axes x1y2 w lp lw 3 lt 2,\
+   "/Users/ashkandehghan/Desktop/SCFT_CODES/AB_Charged_ThinFilm/PHI/phi1Dx.dat" using 1:6 axes x1y1 w lp lw 3 lt 3
+#  "/Users/ashkandehghan/Desktop/SCFT_CODES/AB_Charged_ThinFilm/PHI/phi1Dx.dat" using 1:5 axes x1y1 w lp lw 3 lt 4
 
 pause(-1)
 

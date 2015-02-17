@@ -16,7 +16,7 @@ void MOD_main(double ***w, double ***phi, double **psi, double **eta, double **d
   pIave=PA*pAave;
   
   // Potential difference *************************
-  psi_bc_1=0.0;
+  psi_bc_1=10.0;
   psi_bc_2=0.0; // Will be kept at zero all the time
   
   mu=-1.0; // set to - for B_Sub and set to + for A_Sub
