@@ -10,7 +10,8 @@ void MOD_main_Vcritical_vs_mu(double ***w, double ***phi, double **psi, double *
   double delV, delmu;
   double V_critical;
   double mu_limit;
-  int j;
+  double del_fE_now, del_fE_old;
+  int i,j;
 
   //   ** IMPORTANT**
   // When setting mu (interaction strength between A/B and substrates) it is importnat to
@@ -24,6 +25,23 @@ void MOD_main_Vcritical_vs_mu(double ***w, double ***phi, double **psi, double *
   // Overwriting the chosen parameters:
   psi_bc_1=0.0;
   mu=0.0;
+  //||||||||||||||||||||||||||||||||||||||||||||||
+  // This is where we define the h(r) only nonzero at surfaces
+  for(i=0;i<Nx;i++){
+    for(j=0;j<Ny;j++){
+      if(i==0){
+	x_sub[0][i][j]=-mu;
+	x_sub[1][i][j]=mu;
+      }else if(i==(Nx-1)){
+	x_sub[0][i][j]=-mu;
+	x_sub[1][i][j]=mu;
+      }else{
+	x_sub[0][i][j]=0.0;
+	x_sub[1][i][j]=0.0;
+      }
+    }
+  }
+  //||||||||||||||||||||||||||||||||||||||||||||||
   //+++++++++++++++++++++++++++++++++++
 
   // Setting the top limit of mu
@@ -45,11 +63,6 @@ void MOD_main_Vcritical_vs_mu(double ***w, double ***phi, double **psi, double *
     
     do{ // this do loop will run over voltages
       
-      // Overwriting the chosen parameters:
-      // Potential difference *************************
-      psi_bc_1+=delV;
-      psi_bc_2=0.0; // Will be kept at zero all the time
-      //+++++++++++++++++++++++++++++++++++
       
       for(j=0;j<2;j++){
 	// Setting the structure 1=on 0=off
@@ -72,6 +85,8 @@ void MOD_main_Vcritical_vs_mu(double ***w, double ***phi, double **psi, double *
 	} else if(PER==1){
 	  fE_Per=FreeEnergy(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub);
 	}
+	del_fE_now=fE_Par-fE_Per;
+	if(fE_Par<fE_Per){del_fE_old=del_fE_now;}
 	
 	
       }
@@ -84,13 +99,19 @@ void MOD_main_Vcritical_vs_mu(double ***w, double ***phi, double **psi, double *
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
       std::cout<<"delV="<<psi_bc_1<<" "<<"  delfE="<<fE_Par-fE_Per<<" "<<"  tau="<<tau<<std::endl;
+
+
+      // Overwriting the chosen parameters:
+      // Potential difference *************************
+      psi_bc_1+=delV;
+      psi_bc_2=0.0; // Will be kept at zero all the time
+      //+++++++++++++++++++++++++++++++++++
       
     }while(fE_Par<fE_Per);
     std::cout<<"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"<<std::endl;
     
     // Setting the critical Voltage
-    // Using the midpoint between the Vi and Vi+1
-    V_critical = psi_bc_1-0.5*delV;
+    V_critical = FindIntersect (psi_bc_1-2.0*delV, del_fE_old, psi_bc_1-delV, del_fE_now, 0.0, 0.0, 1.0, 0.0);
     
     // Set the voltage back for new scan
     // It doesnt have to start from 0 again
@@ -98,6 +119,23 @@ void MOD_main_Vcritical_vs_mu(double ***w, double ***phi, double **psi, double *
 
     // Setting the PA
     mu+=delmu;
+    //||||||||||||||||||||||||||||||||||||||||||||||
+    // This is where we define the h(r) only nonzero at surfaces
+    for(i=0;i<Nx;i++){
+      for(j=0;j<Ny;j++){
+	if(i==0){
+	  x_sub[0][i][j]=-mu;
+	  x_sub[1][i][j]=mu;
+	}else if(i==(Nx-1)){
+	  x_sub[0][i][j]=-mu;
+	  x_sub[1][i][j]=mu;
+	}else{
+	  x_sub[0][i][j]=0.0;
+	  x_sub[1][i][j]=0.0;
+	}
+      }
+    }
+    //||||||||||||||||||||||||||||||||||||||||||||||
 
 
     std::ofstream outputFile37("./RESULTS/MOD_main_Vcritical_vs_mu.dat" , ios::app);

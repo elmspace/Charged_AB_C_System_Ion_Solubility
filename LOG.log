@@ -48,3 +48,15 @@ Feb 16 2015 11:53 PM
 
 Will be commiting all the changes so far and pushing it to GitHub.
 I will pull it to SHARCNET and will run some jobs over night.
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Feb 17 2015 9:06 AM
+
+Today we will be looking at the MOD_main_Vcritical_vs_mu mod. We will be running some tests to see if things work fine.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Feb 17 2015 12:19 PM
+
+Did some test runs. The results looked fine. The charge density when plotted in the y-direction (perpendicular to electrodes) didnt look symmetrical for the V=0.
+There is no reason why it shouldnt be symmetrical, so will be looking into that.

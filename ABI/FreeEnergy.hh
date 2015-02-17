@@ -3,7 +3,7 @@ double FreeEnergy(double ***w, double ***phi, double **psi, double **eta, double
   
   double  currentfE, oldfE, deltafE;  
   int     i,j,iter,chain,ii,jj; 
-  double  precision=1.0e-3; 
+  double  precision=1.0e-2; 
   double  QAB,QI; 
   double  fEW, fEchi, fES, fE_charge, fESurf, fE_homogenous; 
   double  epsilon, gamma;
@@ -132,7 +132,7 @@ double FreeEnergy(double ***w, double ***phi, double **psi, double **eta, double
       deltafE=fabs(currentfE-oldfE);
 
       // Print out some results
-      //std::cout<<iter<<" "<<(currentfE-fE_homogenous)<< " " << deltaW<<" "<<delphi[Nx/2][Ny/2]<<std::endl;
+      std::cout<<iter<<" "<<(currentfE-fE_homogenous)<< " " << deltaW<<" "<<delphi[Nx/2][Ny/2]<<std::endl;
       
       for(i=0;i<Nx;i++){
 	for(j=0;j<Ny;j++){
