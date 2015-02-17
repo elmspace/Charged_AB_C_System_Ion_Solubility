@@ -22,7 +22,7 @@ void MOD_main_Vcritical_vs_PA(double ***w, double ***phi, double **psi, double *
   parametersAB(chi,f,ds,Ns,dxy,chiMatrix,x_sub);
 
   // Overwriting the chosen parameters:
-  psi_bc_1=9.0;
+  psi_bc_1=0.0;
   psi_bc_2=0.0; // Will be kept at zero all the time
   PA=0.00000000001;
   // Average concentrations (Because pIave depends on PA)
@@ -30,12 +30,12 @@ void MOD_main_Vcritical_vs_PA(double ***w, double ***phi, double **psi, double *
   //+++++++++++++++++++++++++++++++++++
 
   // Setting the top limit of PA
-  PA_limit=0.01;
+  PA_limit=0.005;
   //+++++++++++++++++++++++++++++++++++
   
   // Setting the del parameters (step sizes)
   delV=1.0;
-  delPA=0.001; // 20 steps from 0 to PALimit
+  delPA=0.0005; // 20 steps from 0 to PALimit
   //+++++++++++++++++++++++++++++++++++
 
    
@@ -113,7 +113,7 @@ void MOD_main_Vcritical_vs_PA(double ***w, double ***phi, double **psi, double *
     // Set the voltage back for new scan
     // It doesnt have to start from 0 again
     //psi_bc_1-=(5.0*delV);
-    psi_bc_1=9.0;
+    psi_bc_1-=5.0*delV;
     psi_bc_2=0.0; // Will be kept at zero all the time
 
     // Setting the PA
