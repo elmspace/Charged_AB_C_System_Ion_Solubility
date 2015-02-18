@@ -60,3 +60,26 @@ Feb 17 2015 12:19 PM
 
 Did some test runs. The results looked fine. The charge density when plotted in the y-direction (perpendicular to electrodes) didnt look symmetrical for the V=0.
 There is no reason why it shouldnt be symmetrical, so will be looking into that.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Feb 17 2015 8:14 PM
+
+Will be attempting to fix and test the MOD_main_Vcritical_vs_mu.
+A side project: Try to allocate all the memory in the main.cpp and not in functions for speed up. This probably require branching.
+Here is a list of all the places outside main.cpp where we are allocating memory:
+
+- FreeEnergy.hh
+- ConcAB.hh
+- ConcI.hh
+- fEhomo.hh
+- size_adjust_1D_x.hh
+- size_adjust_2D_xy.hh
+- Slope_Calc2.hh
+- Slope_Calc.hh
+- solvediffeq.hh
+- SolvePsi.hh
+- WaveVectors.hh
+
+For all these functions, we probably have make all these pointers global.
+
+The MOD_main_Vcritical_vs_mu.hh is working and the results look good. Next step is to submit it to SHARCNET.

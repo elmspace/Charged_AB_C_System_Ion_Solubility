@@ -47,7 +47,6 @@ void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, dou
   //std::cout<<"tau= "<<tau<<std::endl;
  
 
-
   // Fraction of A in diblock
   f=double(Ns[0]/NAB);
 

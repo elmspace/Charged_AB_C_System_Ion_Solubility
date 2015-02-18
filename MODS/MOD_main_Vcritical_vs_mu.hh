@@ -24,7 +24,8 @@ void MOD_main_Vcritical_vs_mu(double ***w, double ***phi, double **psi, double *
 
   // Overwriting the chosen parameters:
   psi_bc_1=0.0;
-  mu=0.0;
+  psi_bc_2=0.0; // This is always set to 0.0
+  mu=0.1;
   //||||||||||||||||||||||||||||||||||||||||||||||
   // This is where we define the h(r) only nonzero at surfaces
   for(i=0;i<Nx;i++){
@@ -50,11 +51,8 @@ void MOD_main_Vcritical_vs_mu(double ***w, double ***phi, double **psi, double *
   
   // Setting the del parameters (step sizes)
   delV=2.5;
-  delmu=1.0e-1; 
+  delmu=0.1; 
   //+++++++++++++++++++++++++++++++++++
-
- 
-
 
   
   do{ // this do loop will run over mu values
@@ -68,8 +66,8 @@ void MOD_main_Vcritical_vs_mu(double ***w, double ***phi, double **psi, double *
 	// Setting the structure 1=on 0=off
 	if(j==0){
 	  PER=0;             // perpendicular
-	  PAR_AS=0;          // parallel A by substrate
-	  PAR_BS=1;          // parallel B by substrate
+	  PAR_AS=1;          // parallel A by substrate
+	  PAR_BS=0;          // parallel B by substrate
 	  MIX=0;             // mixed
 	}else{
 	  PER=1;             // perpendicular
@@ -85,11 +83,13 @@ void MOD_main_Vcritical_vs_mu(double ***w, double ***phi, double **psi, double *
 	} else if(PER==1){
 	  fE_Per=FreeEnergy(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub);
 	}
-	del_fE_now=fE_Par-fE_Per;
-	if(fE_Par<fE_Per){del_fE_old=del_fE_now;}
+
 	
 	
       }
+
+      del_fE_now=fE_Par-fE_Per;
+      if(fE_Par<fE_Per){del_fE_old=del_fE_now;}
       
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       // Initial_Read is if there is already a .read file for the structre
@@ -116,6 +116,12 @@ void MOD_main_Vcritical_vs_mu(double ***w, double ***phi, double **psi, double *
     // Set the voltage back for new scan
     // It doesnt have to start from 0 again
     psi_bc_1-=(5.0*delV);
+    if(psi_bc_1<0.0){psi_bc_1=0.0;} // If the potential is set to less than zero, reset it to zero
+
+    std::ofstream outputFile37("./RESULTS/MOD_main_Vcritical_vs_mu.dat" , ios::app);
+    outputFile37 <<V_critical<<" "<<mu<<" "<<tau<<std::endl;
+    outputFile37.close();
+
 
     // Setting the PA
     mu+=delmu;
@@ -136,11 +142,6 @@ void MOD_main_Vcritical_vs_mu(double ***w, double ***phi, double **psi, double *
       }
     }
     //||||||||||||||||||||||||||||||||||||||||||||||
-
-
-    std::ofstream outputFile37("./RESULTS/MOD_main_Vcritical_vs_mu.dat" , ios::app);
-    outputFile37 <<V_critical<<" "<<mu<<" "<<tau<<std::endl;
-    outputFile37.close();
 
     // This will check for the correct combination of mu and configuration
     if((mu<0.0)&&(PAR_AS==1)){std::cout<<"Your initial condition and this parameter dont match."<<std::endl;}
