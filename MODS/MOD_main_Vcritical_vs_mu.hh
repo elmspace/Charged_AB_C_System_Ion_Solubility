@@ -1,9 +1,9 @@
 void MOD_main_Vcritical_vs_mu(double ***w, double ***phi, double **psi, double **eta, double **diel_cons, double *Ns, double ds, double **k_vector, double *chi, double *dxy, double **chiMatrix, double ***x_sub, double f){
 
   // Cleaning the .dat file
-  std::ofstream outputFile37("./RESULTS/MOD_main_Vcritical_vs_mu.dat");
-  outputFile37 << std::endl;
-  outputFile37.close();
+  //std::ofstream outputFile37("./RESULTS/MOD_main_Vcritical_vs_mu.dat");
+  //outputFile37 << std::endl;
+  //outputFile37.close();
   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   
   double fE_Par, fE_Per;
@@ -23,9 +23,9 @@ void MOD_main_Vcritical_vs_mu(double ***w, double ***phi, double **psi, double *
   parametersAB(chi,f,ds,Ns,dxy,chiMatrix,x_sub);
 
   // Overwriting the chosen parameters:
-  psi_bc_1=0.0;
+  psi_bc_1=15.0;
   psi_bc_2=0.0; // This is always set to 0.0
-  mu=0.1;
+  mu=-7.0; //- for B + for A near substrate
   //||||||||||||||||||||||||||||||||||||||||||||||
   // This is where we define the h(r) only nonzero at surfaces
   for(i=0;i<Nx;i++){
@@ -46,11 +46,11 @@ void MOD_main_Vcritical_vs_mu(double ***w, double ***phi, double **psi, double *
   //+++++++++++++++++++++++++++++++++++
 
   // Setting the top limit of mu
-  mu_limit=5.0;
+  mu_limit=0.0;
   //+++++++++++++++++++++++++++++++++++
   
   // Setting the del parameters (step sizes)
-  delV=2.5;
+  delV=2.0;
   delmu=0.1; 
   //+++++++++++++++++++++++++++++++++++
 
@@ -66,21 +66,21 @@ void MOD_main_Vcritical_vs_mu(double ***w, double ***phi, double **psi, double *
 	// Setting the structure 1=on 0=off
 	if(j==0){
 	  PER=0;             // perpendicular
-	  PAR_AS=1;          // parallel A by substrate
-	  PAR_BS=0;          // parallel B by substrate
+	  PAR_AS=0;          // parallel A by substrate
+	  PAR_BS=1;          // parallel B by substrate
 	  MIX=0;             // mixed
 	}else{
-	  PER=1;             // perpendicular
+	  PER=0;             // perpendicular
 	  PAR_AS=0;          // parallel A by substrate
 	  PAR_BS=0;          // parallel B by substrate
-	  MIX=0;             // mixed
+	  MIX=1;             // mixed
 	}
 	
 	omega(w);
 	
 	if((PAR_AS==1)||(PAR_BS==1)){
 	  fE_Par=FreeEnergy(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub);
-	} else if(PER==1){
+	} else if((PER==1)||(MIX==1)){
 	  fE_Per=FreeEnergy(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub);
 	}
 
@@ -115,7 +115,7 @@ void MOD_main_Vcritical_vs_mu(double ***w, double ***phi, double **psi, double *
     
     // Set the voltage back for new scan
     // It doesnt have to start from 0 again
-    psi_bc_1-=(5.0*delV);
+    psi_bc_1-=(3.0*delV);
     if(psi_bc_1<0.0){psi_bc_1=0.0;} // If the potential is set to less than zero, reset it to zero
 
     std::ofstream outputFile37("./RESULTS/MOD_main_Vcritical_vs_mu.dat" , ios::app);

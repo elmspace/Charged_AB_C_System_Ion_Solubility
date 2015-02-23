@@ -142,9 +142,10 @@ double FreeEnergy(double ***w, double ***phi, double **psi, double **eta, double
 	}
       }
    
+   
     }while((deltaW>precision)||(iter<1000));
 
-    std::cout<<iter<<" delfE="<<(currentfE-fE_homogenous)<<"   delW="<< deltaW<<"   Lx="<<dxy[0]*Nx<<"   Ly="<<dxy[1]*Ny<<std::endl;
+    //std::cout<<iter<<" delfE="<<(currentfE-fE_homogenous)<<"   delW="<< deltaW<<"   Lx="<<dxy[0]*Nx<<"   Ly="<<dxy[1]*Ny<<std::endl;
     outputFile <<dxy[0]*Nx<<" "<<dxy[1]*Ny<<" "<<currentfE<<" "<<fE_homogenous<<std::endl;    
 
     Free_Energy=oldfE;

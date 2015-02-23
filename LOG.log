@@ -97,3 +97,6 @@ Feb 23 2015 8:13 AM
 
 Today I will do some runs for low ion concentration and calculate the lamellar spacing.
 Will do some test on the Vc-mu phase diagram and submit some jobs to SHARCNET.
+I did most of the mu_Vc phase diagram for PA=0 case. 
+The Lam_Spacing works fine is V_1=V_2=0.0, we dont have to remove the
+boundaries. Although the Lamellar spacing still looks odd.

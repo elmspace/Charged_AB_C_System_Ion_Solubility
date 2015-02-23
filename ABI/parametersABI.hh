@@ -17,7 +17,7 @@ void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, dou
   kB=2.5;
   
   // Charge percentage 1e-10 is 0
-  PA=0.001;
+  PA=0.00000000001;
 
   // This is for convering the BP solver
   tt=cos(Pi/Nx)+cos(Pi/Ny);

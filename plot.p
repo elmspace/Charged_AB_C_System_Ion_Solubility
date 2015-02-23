@@ -26,7 +26,7 @@ set title 'Electrode'  font ",22"
    set view map 
    set autoscale
    set size square
-   splot "/Users/ashkandehghan/Desktop/SCFT_CODES/AB_Charged_ThinFilm/PHI/phi2D.dat" using 2:1:3
+   splot "/1/home/dehgha2/Desktop/Electric_Thin_Film_Project/AB_Charged_ThinFilm/PHI/phi2D.dat" using 2:1:3
 
 
 
