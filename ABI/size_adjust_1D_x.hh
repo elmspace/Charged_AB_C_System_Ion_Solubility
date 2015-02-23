@@ -13,9 +13,8 @@ void size_adjust_1D_x(double ***w, double ***phi, double **psi, double **eta, do
   box_fE=create_1d_double_array(2,"box_fE");
   dxy_temp=create_1d_double_array(3,"dxy_temp");
 
-  dely=0.025/Ny;
+  dely=0.001/Ny;
  
-  //std::cout<<"++++++++++++++++++++++++++++++++++++++++++++++++++++"<<std::endl;
   l=0;
   for(j=-1;j<2;j++){
     
@@ -48,24 +47,18 @@ void size_adjust_1D_x(double ***w, double ***phi, double **psi, double **eta, do
     }
     
   }
-  //std::cout<<"++++++++++++++++++++++++++++++++++++++++++++++++++++"<<std::endl;
-  
-  for(i=0;i<1;i++){
-    ii=0;
-    for(j=i+1;j<2;j++){
-      if(box_fE[i]<box_fE[j]){
-	ii=ii+1;
-      }
-    }
-    if(ii==(2-(i+1))){
-      break;
-    }
-  }
 
+
+  if(box_fE[0]<box_fE[1]){
+    dxy[0]=dxy[0];
+    dxy[1]=dxy[1]+box_y[0];
+  }else if(box_fE[1]<box_fE[0]){
+    dxy[0]=dxy[0];
+    dxy[1]=dxy[1]+box_y[1];
+  }else{
+    cout<<"Something doesnt make sense!"<<endl;
+  }
   
-  dxy[0]=dxy[0];
-  dxy[1]=dxy[1]+box_y[i];
-    
 
   // Destroying the allocated memory --------------------------
   destroy_2d_double_array(psi_temp);

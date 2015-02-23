@@ -28,7 +28,7 @@ void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, dou
   psi_bc_2=0.0; // Will be kept at zero all the time
 
   // This is the surface interaction with substrate if - then B is attracted to substrate, if + then A is attracted
-  mu=-1.0;
+  mu=0.0;
 
   if((mu<0.0)&&(PAR_AS==1)){std::cout<<"Your initial condition and this parameter dont match."<<std::endl;}
   if((mu>0.0)&&(PAR_BS==1)){std::cout<<"Your initial condition and this parameter dont match."<<std::endl;}

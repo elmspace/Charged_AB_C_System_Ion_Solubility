@@ -30,6 +30,7 @@ Written By:   Ashkan Dehghan [McMaster University]
 #include "./ABI/Save_Stuff.hh"
 
 #include "./MODS/MOD_main.hh"
+#include "./MODS/MOD_main_Lam_Spacing.hh"
 #include "./MODS/MOD_main_delfE_vs_delV.hh"
 #include "./MODS/MOD_main_Vcritical_vs_PA.hh"
 #include "./MODS/MOD_main_Vcritical_vs_mu.hh"
@@ -90,6 +91,7 @@ int main(){
   
 
   MOD_main(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
+  //MOD_main_Lam_Spacing(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
   //MOD_main_delfE_vs_delV(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
   //MOD_main_Vcritical_vs_PA(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
   //MOD_main_Vcritical_vs_mu(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
@@ -140,6 +142,8 @@ MOD_main_Vcritical_vs_PA ---> This mod will run over different configuration for
 MOD_main_Vcritical_vs_mu ---> This mod will run over different configuration for a set of parameters and compare their free energy for a given voltage. At the critical voltage where the 
                               perpendicular configuration is more favarable, it will terminate and starts scanning for Vcritical for a different mu value. The final product would be a 
                               a function of Vcritical vs mu (here mu is the interaction strength between the A/B and substrates)
+
+MOD_main_Lam_Spacing ---> This mod is simple. It will calculate the min Lamellar spacing as function of what ever variable.
 
 
  */

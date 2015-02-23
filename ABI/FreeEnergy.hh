@@ -3,7 +3,7 @@ double FreeEnergy(double ***w, double ***phi, double **psi, double **eta, double
   
   double  currentfE, oldfE, deltafE;  
   int     i,j,iter,chain,ii,jj; 
-  double  precision=1.0e-2; 
+  double  precision=1.0e-3; 
   double  QAB,QI; 
   double  fEW, fEchi, fES, fE_charge, fESurf, fE_homogenous; 
   double  epsilon, gamma;
@@ -132,7 +132,7 @@ double FreeEnergy(double ***w, double ***phi, double **psi, double **eta, double
       deltafE=fabs(currentfE-oldfE);
 
       // Print out some results
-      std::cout<<iter<<" "<<(currentfE-fE_homogenous)<< " " << deltaW<<" "<<delphi[Nx/2][Ny/2]<<std::endl;
+      //std::cout<<iter<<" delfE="<<(currentfE-fE_homogenous)<<"   delW="<< deltaW<<std::endl;
       
       for(i=0;i<Nx;i++){
 	for(j=0;j<Ny;j++){
@@ -142,9 +142,9 @@ double FreeEnergy(double ***w, double ***phi, double **psi, double **eta, double
 	}
       }
    
-    }while((deltaW>precision)||(iter<200));
+    }while((deltaW>precision)||(iter<1000));
 
-   
+    std::cout<<iter<<" delfE="<<(currentfE-fE_homogenous)<<"   delW="<< deltaW<<"   Lx="<<dxy[0]*Nx<<"   Ly="<<dxy[1]*Ny<<std::endl;
     outputFile <<dxy[0]*Nx<<" "<<dxy[1]*Ny<<" "<<currentfE<<" "<<fE_homogenous<<std::endl;    
 
     Free_Energy=oldfE;
@@ -157,6 +157,8 @@ double FreeEnergy(double ***w, double ***phi, double **psi, double **eta, double
     }
     if(msg>0.5){
       oldfE=currentfE;
+      Lx=dxy[0]*Nx;
+      Ly=dxy[1]*Ny;
     }
     if(box_min==0){
       msg=0.0;

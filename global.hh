@@ -41,6 +41,7 @@ double converg;
 double psi_bc_1;
 double psi_bc_2;
 double Free_Energy;
+double Lx,Ly;
 
 fftw_plan forward_plan, inverse_plan;
 double *input_q, *transformed_q, *final_q;
