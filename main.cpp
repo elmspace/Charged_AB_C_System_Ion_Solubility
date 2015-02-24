@@ -32,6 +32,7 @@ Written By:   Ashkan Dehghan [McMaster University]
 #include "./MODS/MOD_main.hh"
 #include "./MODS/MOD_main_Lam_Spacing.hh"
 #include "./MODS/MOD_main_delfE_vs_delV.hh"
+#include "./MODS/MOD_main_fE_vs_delV.hh"
 #include "./MODS/MOD_main_Vcritical_vs_PA.hh"
 #include "./MODS/MOD_main_Vcritical_vs_mu.hh"
 
@@ -93,8 +94,9 @@ int main(){
   //MOD_main(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
   //MOD_main_Lam_Spacing(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
   //MOD_main_delfE_vs_delV(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
+  MOD_main_fE_vs_delV(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
   //MOD_main_Vcritical_vs_PA(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
-  MOD_main_Vcritical_vs_mu(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
+  //MOD_main_Vcritical_vs_mu(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
   
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -133,6 +135,8 @@ MOD_main ---> This is a simple mod, which will use the parameters in the paramet
 
 MOD_main_delfE_vs_delV ---> This mod will compare the free energy of the parallel to the perpendicular for a given parameter set as a function of voltage.
                             The final output would be a plot of delF vs delV
+
+MOD_main_fE_vs_delV ---> This is very similar to MOD_main_delfE_vs_delV, but it just calculates the free energy of one phase as a function of voltage, not comparing two different phases.
 
 
 MOD_main_Vcritical_vs_PA ---> This mod will run over different configuration for a set of parameters and compare their free energy for a given voltage. At the critical voltage where the 

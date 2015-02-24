@@ -3,7 +3,7 @@ double FreeEnergy(double ***w, double ***phi, double **psi, double **eta, double
   
   double  currentfE, oldfE, deltafE;  
   int     i,j,iter,chain,ii,jj; 
-  double  precision=1.0e-3; 
+  double  precision=1.0e-2; 
   double  QAB,QI; 
   double  fEW, fEchi, fES, fE_charge, fESurf, fE_homogenous; 
   double  epsilon, gamma;
@@ -143,7 +143,7 @@ double FreeEnergy(double ***w, double ***phi, double **psi, double **eta, double
       }
    
    
-    }while((deltaW>precision)||(iter<1000));
+    }while((deltaW>precision)||(iter<500));
 
     //std::cout<<iter<<" delfE="<<(currentfE-fE_homogenous)<<"   delW="<< deltaW<<"   Lx="<<dxy[0]*Nx<<"   Ly="<<dxy[1]*Ny<<std::endl;
     outputFile <<dxy[0]*Nx<<" "<<dxy[1]*Ny<<" "<<currentfE<<" "<<fE_homogenous<<std::endl;    

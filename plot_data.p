@@ -3,11 +3,7 @@ set key b l
 
 f(x) = 0.0
 
-plot  "/Users/ashkandehghan/Desktop/SCFT_CODES/AB_Charged_ThinFilm/RESULTS/MOD_main_delfE_vs_delV.dat" using 1:($4-$3) title "RUN" w lp lw 2 pt 8,\
-"/Users/ashkandehghan/Desktop/SCFT_CODES/AB_Charged_ThinFilm/RESULTS/MOD_main_delfE_vs_delV_BS/MOD_main_delfE_vs_delV_PA_000.dat" using 1:($4-$3) title "PA=0.000" w l lw 2,\
-"/Users/ashkandehghan/Desktop/SCFT_CODES/AB_Charged_ThinFilm/RESULTS/MOD_main_delfE_vs_delV_BS/MOD_main_delfE_vs_delV_PA_001.dat" using 1:($4-$3) title "PA=0.001" w l lw 2,\
-"/Users/ashkandehghan/Desktop/SCFT_CODES/AB_Charged_ThinFilm/RESULTS/MOD_main_delfE_vs_delV_BS/MOD_main_delfE_vs_delV_PA_002.dat" using 1:($4-$3) title "PA=0.002" w l lw 2,\
-f(x) w l notitle " " lc -1
+plot  "/Users/ashkandehghan/Desktop/SCFT_CODES/AB_Charged_ThinFilm/RESULTS/MOD_main_fE_vs_delV.dat" using 1:3 title "RUN" w lp lw 2 pt 8
 
 
 pause(-1)

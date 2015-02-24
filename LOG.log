@@ -100,3 +100,10 @@ Will do some test on the Vc-mu phase diagram and submit some jobs to SHARCNET.
 I did most of the mu_Vc phase diagram for PA=0 case. 
 The Lam_Spacing works fine is V_1=V_2=0.0, we dont have to remove the
 boundaries. Although the Lamellar spacing still looks odd.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Feb 24 2015 12:04 AM
+
+I have added a Mod that calculates the free energy of a single phase as a function of voltage.
+Did some more calculations on the mu-vc phase diagram.
+Will need to make a mod, that just calculates the free energy of different phases as a function of Vc, for a given mu, to get the mixed phase.

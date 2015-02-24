@@ -23,9 +23,9 @@ void MOD_main_Vcritical_vs_mu(double ***w, double ***phi, double **psi, double *
   parametersAB(chi,f,ds,Ns,dxy,chiMatrix,x_sub);
 
   // Overwriting the chosen parameters:
-  psi_bc_1=15.0;
+  psi_bc_1=19.0;
   psi_bc_2=0.0; // This is always set to 0.0
-  mu=-7.0; //- for B + for A near substrate
+  mu=-4.8; //- for B + for A near substrate
   //||||||||||||||||||||||||||||||||||||||||||||||
   // This is where we define the h(r) only nonzero at surfaces
   for(i=0;i<Nx;i++){
@@ -95,7 +95,7 @@ void MOD_main_Vcritical_vs_mu(double ***w, double ***phi, double **psi, double *
       // Initial_Read is if there is already a .read file for the structre
       Initial_Read=0; // 1=yes 0=no
       // 0=read 1=set manually 2=random
-      Iomega=0;
+      Iomega=1;
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
       std::cout<<"delV="<<psi_bc_1<<" "<<"  delfE="<<fE_Par-fE_Per<<" "<<"  tau="<<tau<<std::endl;
@@ -115,7 +115,7 @@ void MOD_main_Vcritical_vs_mu(double ***w, double ***phi, double **psi, double *
     
     // Set the voltage back for new scan
     // It doesnt have to start from 0 again
-    psi_bc_1-=(3.0*delV);
+    psi_bc_1-=(2.0*delV);
     if(psi_bc_1<0.0){psi_bc_1=0.0;} // If the potential is set to less than zero, reset it to zero
 
     std::ofstream outputFile37("./RESULTS/MOD_main_Vcritical_vs_mu.dat" , ios::app);
