@@ -35,6 +35,7 @@ Written By:   Ashkan Dehghan [McMaster University]
 #include "./MODS/MOD_main_fE_vs_delV.hh"
 #include "./MODS/MOD_main_Vcritical_vs_PA.hh"
 #include "./MODS/MOD_main_Vcritical_vs_mu.hh"
+#include "./MODS/MOD_main_Vcritical_vs_mu_all_Phases.hh"
 
 using namespace std;
 
@@ -94,9 +95,10 @@ int main(){
   //MOD_main(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
   //MOD_main_Lam_Spacing(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
   //MOD_main_delfE_vs_delV(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
-  MOD_main_fE_vs_delV(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
+  //MOD_main_fE_vs_delV(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
   //MOD_main_Vcritical_vs_PA(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
   //MOD_main_Vcritical_vs_mu(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
+  MOD_main_Vcritical_vs_mu_all_Phases(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub,f);
   
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -147,7 +149,10 @@ MOD_main_Vcritical_vs_mu ---> This mod will run over different configuration for
                               perpendicular configuration is more favarable, it will terminate and starts scanning for Vcritical for a different mu value. The final product would be a 
                               a function of Vcritical vs mu (here mu is the interaction strength between the A/B and substrates)
 
+MOD_main_Vcritical_vs_mu_all_Phases ---> In this mod, for a given mu, we will calculate the free energy for any number of phases, as a function of V.
+
 MOD_main_Lam_Spacing ---> This mod is simple. It will calculate the min Lamellar spacing as function of what ever variable.
+
 
 
  */

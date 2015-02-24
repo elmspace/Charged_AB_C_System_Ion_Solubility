@@ -3,7 +3,7 @@ double FreeEnergy(double ***w, double ***phi, double **psi, double **eta, double
   
   double  currentfE, oldfE, deltafE;  
   int     i,j,iter,chain,ii,jj; 
-  double  precision=1.0e-2; 
+  double  precision=1.0e-3; 
   double  QAB,QI; 
   double  fEW, fEchi, fES, fE_charge, fESurf, fE_homogenous; 
   double  epsilon, gamma;

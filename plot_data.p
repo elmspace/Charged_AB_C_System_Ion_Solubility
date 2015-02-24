@@ -3,7 +3,9 @@ set key b l
 
 f(x) = 0.0
 
-plot  "/Users/ashkandehghan/Desktop/SCFT_CODES/AB_Charged_ThinFilm/RESULTS/MOD_main_fE_vs_delV.dat" using 1:3 title "RUN" w lp lw 2 pt 8
+plot  "/Users/ashkandehghan/Desktop/SCFT_CODES/AB_Charged_ThinFilm/RESULTS/MOD_main_Vcritical_vs_mu_all_Phases.dat" using 1:2 title "Par" w lp lw 2 pt 8,\
+ "/Users/ashkandehghan/Desktop/SCFT_CODES/AB_Charged_ThinFilm/RESULTS/MOD_main_Vcritical_vs_mu_all_Phases.dat" using 1:3 title "Per" w lp lw 2 pt 8,\
+ "/Users/ashkandehghan/Desktop/SCFT_CODES/AB_Charged_ThinFilm/RESULTS/MOD_main_Vcritical_vs_mu_all_Phases.dat" using 1:4 title "Mix" w lp lw 2 pt 8
 
 
 pause(-1)
