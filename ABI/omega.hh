@@ -45,41 +45,39 @@ void omega(double ***w){
     if(PAR_AS==1){
       for(i=0;i<Nx;i++){
 	for(j=0;j<Ny;j++){
-	  w[0][i][j]=-10.0*cos(4.0*Pi*i/Nx);
-	  w[1][i][j]=10.0*cos(4.0*Pi*i/Nx);
+	  w[0][i][j]=-1.0*cos(4.0*Pi*i/Nx);
 	}
       }
     }else if(PAR_BS==1){
       for(i=0;i<Nx;i++){
 	for(j=0;j<Ny;j++){
-	  w[1][i][j]=-10.0*cos(4.0*Pi*i/Nx);
-	  w[0][i][j]=10.0*cos(4.0*Pi*i/Nx);
+	  w[1][i][j]=-1.0*cos(4.0*Pi*i/Nx);
 	}
       }
     }else if(PER==1){
       for(i=0;i<Nx;i++){
 	for(j=0;j<Ny;j++){
-	  w[0][i][j]=-10.0*cos(4.0*Pi*j/Ny);
-	  w[1][i][j]=10.0*cos(4.0*Pi*j/Ny);
+	  w[0][i][j]=-1.0*cos(4.0*Pi*j/Ny);
+	  w[1][i][j]=1.0*cos(4.0*Pi*j/Ny);
 	}
       }
     }else if(MIX==1){
       for(i=0;i<Nx;i++){
 	for(j=0;j<Ny;j++){
-	  w[0][i][j]=-10.0*cos(4.0*Pi*j/Ny);
-	  w[1][i][j]=10.0*cos(4.0*Pi*j/Ny);
+	  w[0][i][j]=-1.0*cos(4.0*Pi*j/Ny);
+	  w[1][i][j]=1.0*cos(4.0*Pi*j/Ny);
 	}
       }
       for(i=0;i<3;i++){
 	for(j=0;j<Ny;j++){
 	  w[0][i][j]=0.0;
-	  w[1][i][j]=-10.0;
+	  w[1][i][j]=-1.0;
 	}
       }
       for(i=Nx-3;i<Nx;i++){
 	for(j=0;j<Ny;j++){
 	  w[0][i][j]=0.0;
-	  w[1][i][j]=-10.0;
+	  w[1][i][j]=-1.0;
 	}
       }
     }else{

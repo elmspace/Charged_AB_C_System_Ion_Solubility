@@ -37,7 +37,7 @@ set title 'Electrode -'  font ",22"
    set autoscale
    set size square
    
-   splot path_to_file using 2:1:4
+   splot path_to_file using 2:1:3
 
 
 

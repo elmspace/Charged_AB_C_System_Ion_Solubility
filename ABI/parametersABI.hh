@@ -7,17 +7,17 @@ void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, dou
   box_min=1;
 
   // 0=read 1=set manually 2=random
-  Iomega=1;
+  Iomega=0;
  
   // Initial_Read is if there is already a .read file for the structre
-  Initial_Read=0; // 1=yes 0=no
+  Initial_Read=1; // 1=yes 0=no
 
   // Dielectric constants
   kA=6.0;
   kB=2.5;
   
   // Charge percentage 1e-10 is 0
-  PA=0.00000000001;
+  PA=1.0e-30;
 
   // This is for convering the BP solver
   tt=cos(Pi/Nx)+cos(Pi/Ny);
@@ -64,7 +64,7 @@ void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, dou
   // delta_x delta_y and delta_s
   ds=1.0/NAB;
   dxy[0]=(8.075)/Nx;
-  dxy[1]=(8.075)/Ny;
+  dxy[1]=(8.5)/Ny;
 
   
   // Setting up the interaction matrix

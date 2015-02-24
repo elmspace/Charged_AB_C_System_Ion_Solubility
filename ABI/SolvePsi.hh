@@ -49,8 +49,8 @@ void SOR(double **psi, double **diel_cons, double ***phi , double converg, doubl
 	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i+1][j]+a2[i][j]*psi[i][j+1]+a3[i][j]*psi[i-1][j]+a4[i][j]*psi[i][j-1]+charge[i][j])-(converg*psi[i][j]);
 	  }
 	}
+	avg_psi+=psi[i][j]/(Nx*Ny);
       }
-      avg_psi+=psi[i][j]/(Nx*Ny);
     }
     
     
