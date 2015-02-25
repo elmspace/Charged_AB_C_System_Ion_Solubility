@@ -106,6 +106,7 @@ double FreeEnergy(double ***w, double ***phi, double **psi, double **eta, double
 	    deltaW+=fabs(delW[ii][i][j]);
 	    
 	  }
+      
 	  newW[3][i][j]=NAB*psi[i][j];
 	  delW[3][i][j]=newW[3][i][j]-w[3][i][j];
 	  
@@ -141,6 +142,7 @@ double FreeEnergy(double ***w, double ***phi, double **psi, double **eta, double
 	  }
 	}
       }
+
    
    
     }while((deltaW>precision)||(iter<500));
