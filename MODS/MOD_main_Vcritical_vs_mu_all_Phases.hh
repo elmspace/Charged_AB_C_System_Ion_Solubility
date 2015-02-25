@@ -23,9 +23,9 @@ void MOD_main_Vcritical_vs_mu_all_Phases(double ***w, double ***phi, double **ps
   parametersAB(chi,f,ds,Ns,dxy,chiMatrix,x_sub);
 
   // Overwriting the chosen parameters:
-  psi_bc_1=21.0;
+  psi_bc_1=25.0;
   psi_bc_2=0.0; // This is always set to 0.0
-  mu=-3.5; //- for B + for A near substrate
+  mu=-4.1; //- for B + for A near substrate
   //||||||||||||||||||||||||||||||||||||||||||||||
   // This is where we define the h(r) only nonzero at surfaces
   for(i=0;i<Nx;i++){
@@ -47,10 +47,10 @@ void MOD_main_Vcritical_vs_mu_all_Phases(double ***w, double ***phi, double **ps
 
   // Setting the del parameters (step sizes)
   delV=1.0;
-  psi_bc_Limit=100.0;
+  psi_bc_Limit=30.0;
 
-  delmu=-0.1;
-  mu_Limit=7.0;
+  delmu=-0.05;
+  mu_Limit=-7.0;
   //+++++++++++++++++++++++++++++++++++
 
 
@@ -62,7 +62,7 @@ void MOD_main_Vcritical_vs_mu_all_Phases(double ***w, double ***phi, double **ps
   do{ // this do loop will run over voltages or mu
     
     
-    for(j=0;j<2;j++){
+    for(j=0;j<3;j++){
       // Setting the structure 1=on 0=off
       if(j==0){
 	PER=1;             // perpendicular
