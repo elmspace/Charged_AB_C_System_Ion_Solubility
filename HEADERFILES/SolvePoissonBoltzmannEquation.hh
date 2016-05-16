@@ -28,34 +28,125 @@ void SOR(double **psi, double **diel_cons, double ***phi , double converg, doubl
   }
   Set_a_arrays(diel_cons,a0,a1,a2,a3,a4,dxy);
   
-  avg_psi_old=1000.0;
-  for(s=0;s<1000;s++){
-
-    avg_psi=0.0;
-    for(i=0;i<Nx;i++){
-      for(j=0;j<Ny;j++){
-
-	if(i==0){
-	  psi[i][j]=psi_bc_1;
-	}else if(i==(Nx-1)){
-	  psi[i][j]=psi_bc_2;
-	}else{
-	  if(j==0){
+ 
+  
+  
+  if(Psi_BC==0){
+    
+    avg_psi_old=1000.0;
+    for(s=0;s<10000;s++){
+      
+      avg_psi=0.0;
+      for(i=0;i<Nx;i++){
+	for(j=0;j<Ny;j++){
+	  
+	  if(i==0){
+	    psi[i][j]=psi_bc_1;
+	  }else if(i==(Nx-1)){
+	    psi[i][j]=psi_bc_2;
+	  }else{
+	    if(j==0){
+	      psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i+1][j]+a2[i][j]*psi[i][j+1]+a3[i][j]*psi[i-1][j]+a4[i][j]*psi[i][j]+charge[i][j])-(converg*psi[i][j]);
+	    }else if(j==(Ny-1)){
+	      psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i+1][j]+a2[i][j]*psi[i][j]+a3[i][j]*psi[i-1][j]+a4[i][j]*psi[i][j-1]+charge[i][j])-(converg*psi[i][j]);
+	    }else{
+	      psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i+1][j]+a2[i][j]*psi[i][j+1]+a3[i][j]*psi[i-1][j]+a4[i][j]*psi[i][j-1]+charge[i][j])-(converg*psi[i][j]);
+	    }
+	  }
+	  
+	  avg_psi+=psi[i][j]/(Nx*Ny);
+	}
+      }
+      
+      if(abs(avg_psi_old-avg_psi)<1.0e-4){break;}
+      avg_psi_old=avg_psi;
+    }
+    
+  }else if(Psi_BC==1){
+    
+    avg_psi_old=1000.0;
+    for(s=0;s<10000;s++){
+      
+      avg_psi=0.0;
+      for(i=0;i<Nx;i++){
+	for(j=0;j<Ny;j++){
+	  
+	  if((i==0)&&(j==0)){//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i+1][j]+a2[i][j]*psi[i][j+1]+a3[i][j]*psi[i][j]+a4[i][j]*psi[i][j]+charge[i][j])-(converg*psi[i][j]);
+	    psi[i][j]+=psi_bc_1;
+	  }else if((i==0)&&(j==(Ny-1))){//++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i+1][j]+a2[i][j]*psi[i][j]+a3[i][j]*psi[i][j]+a4[i][j]*psi[i][j-1]+charge[i][j])-(converg*psi[i][j]);
+	    psi[i][j]+=psi_bc_1;
+	  }else if((i==(Nx-1))&&(j==0)){//++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i][j]+a2[i][j]*psi[i][j+1]+a3[i][j]*psi[i-1][j]+a4[i][j]*psi[i][j]+charge[i][j])-(converg*psi[i][j]);
+	    psi[i][j]+=psi_bc_2;
+	  }else if((i==(Nx-1))&&(j==(Ny-1))){//+++++++++++++++++++++++++++++++++++++++++++++++++++
+	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i][j]+a2[i][j]*psi[i][j]+a3[i][j]*psi[i-1][j]+a4[i][j]*psi[i][j-1]+charge[i][j])-(converg*psi[i][j]);
+	    psi[i][j]+=psi_bc_2;
+	  }else if((i==0)&&(j>0)&&(j<(Ny-1))){//++++++++++++++++++++++++++++++++++++++++++++++++++
+	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i+1][j]+a2[i][j]*psi[i][j+1]+a3[i][j]*psi[i][j]+a4[i][j]*psi[i][j-1]+charge[i][j])-(converg*psi[i][j]);
+	    psi[i][j]+=psi_bc_1;
+	  }else if((i==(Nx-1))&&(j>0)&&(j<(Ny-1))){//+++++++++++++++++++++++++++++++++++++++++++++
+	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i][j]+a2[i][j]*psi[i][j+1]+a3[i][j]*psi[i-1][j]+a4[i][j]*psi[i][j-1]+charge[i][j])-(converg*psi[i][j]);
+	    psi[i][j]+=psi_bc_2;
+	  }else if((j==0)&&(i>0)&&(i<(Nx-1))){//++++++++++++++++++++++++++++++++++++++++++++++++++
 	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i+1][j]+a2[i][j]*psi[i][j+1]+a3[i][j]*psi[i-1][j]+a4[i][j]*psi[i][j]+charge[i][j])-(converg*psi[i][j]);
-	  }else if(j==(Ny-1)){
+	  }else if((j==(Ny-1))&&(i>0)&&(i<(Nx-1))){//+++++++++++++++++++++++++++++++++++++++++++++
 	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i+1][j]+a2[i][j]*psi[i][j]+a3[i][j]*psi[i-1][j]+a4[i][j]*psi[i][j-1]+charge[i][j])-(converg*psi[i][j]);
 	  }else{
 	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i+1][j]+a2[i][j]*psi[i][j+1]+a3[i][j]*psi[i-1][j]+a4[i][j]*psi[i][j-1]+charge[i][j])-(converg*psi[i][j]);
 	  }
+	  
+	  avg_psi+=psi[i][j]/(Nx*Ny);
 	}
-	avg_psi+=psi[i][j]/(Nx*Ny);
       }
+      
+      if(abs(avg_psi_old-avg_psi)<1.0e-4){break;}
+      avg_psi_old=avg_psi;
     }
-     
-    if(abs(avg_psi_old-avg_psi)<1.0e-4){break;}
-    avg_psi_old=avg_psi;
+    
+  }else if(Psi_BC==2){
+    
+    avg_psi_old=1000.0;
+    for(s=0;s<10000;s++){
+      
+      avg_psi=0.0;
+      for(i=0;i<Nx;i++){
+	for(j=0;j<Ny;j++){
+	  
+	  if((i==0)&&(j==0)){//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i+1][j]+a2[i][j]*psi[i][j+1]+a3[i][j]*psi[i][j]+a4[i][j]*psi[i][j]+charge[i][j])-(converg*psi[i][j]);
+	  }else if((i==0)&&(j==(Ny-1))){//++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i+1][j]+a2[i][j]*psi[i][j]+a3[i][j]*psi[i][j]+a4[i][j]*psi[i][j-1]+charge[i][j])-(converg*psi[i][j]);
+	  }else if((i==(Nx-1))&&(j==0)){//++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i][j]+a2[i][j]*psi[i][j+1]+a3[i][j]*psi[i-1][j]+a4[i][j]*psi[i][j]+charge[i][j])-(converg*psi[i][j]);
+	  }else if((i==(Nx-1))&&(j==(Ny-1))){//+++++++++++++++++++++++++++++++++++++++++++++++++++
+	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i][j]+a2[i][j]*psi[i][j]+a3[i][j]*psi[i-1][j]+a4[i][j]*psi[i][j-1]+charge[i][j])-(converg*psi[i][j]);
+	  }else if((i==0)&&(j>0)&&(j<(Ny-1))){//++++++++++++++++++++++++++++++++++++++++++++++++++
+	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i+1][j]+a2[i][j]*psi[i][j+1]+a3[i][j]*psi[i][j]+a4[i][j]*psi[i][j-1]+charge[i][j])-(converg*psi[i][j]);
+	  }else if((i==(Nx-1))&&(j>0)&&(j<(Ny-1))){//+++++++++++++++++++++++++++++++++++++++++++++
+	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i][j]+a2[i][j]*psi[i][j+1]+a3[i][j]*psi[i-1][j]+a4[i][j]*psi[i][j-1]+charge[i][j])-(converg*psi[i][j]);
+	  }else if((j==0)&&(i>0)&&(i<(Nx-1))){//++++++++++++++++++++++++++++++++++++++++++++++++++
+	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i+1][j]+a2[i][j]*psi[i][j+1]+a3[i][j]*psi[i-1][j]+a4[i][j]*psi[i][j]+charge[i][j])-(converg*psi[i][j]);
+	  }else if((j==(Ny-1))&&(i>0)&&(i<(Nx-1))){//+++++++++++++++++++++++++++++++++++++++++++++
+	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i+1][j]+a2[i][j]*psi[i][j]+a3[i][j]*psi[i-1][j]+a4[i][j]*psi[i][j-1]+charge[i][j])-(converg*psi[i][j]);
+	  }else{
+	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i+1][j]+a2[i][j]*psi[i][j+1]+a3[i][j]*psi[i-1][j]+a4[i][j]*psi[i][j-1]+charge[i][j])-(converg*psi[i][j]);
+	  }
+	  
+	  avg_psi+=psi[i][j]/(Nx*Ny);
+	}
+      }
+      
+      if(abs(avg_psi_old-avg_psi)<1.0e-4){break;}
+      avg_psi_old=avg_psi;
+    }
+    
+  }else{
+    std::cout<<"The boundary condition chosen for the electric field is not valid!"<<std::endl;
+    exit(0);
   }
-
+  
   // Destroying the allocated memory ---------------------
   destroy_2d_double_array(a0);
   destroy_2d_double_array(a1);

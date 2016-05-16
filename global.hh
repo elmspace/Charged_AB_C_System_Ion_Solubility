@@ -20,10 +20,16 @@ using namespace std;
 
 
 // Set to 1 to minimize box size and 0 to not
-int box_min=0;
+const int box_min = 1;
+
+// Boundy condition for electric field
+// 0 = ThinFilm Extran Field, fixed BC
+// 1 = External Electric Field in Bulk
+// 2 = No External Electric Field
+const int Psi_BC = 2;
 
 // 0=read 1=set manually 2=random
-int  Iomega=1;
+const int  Iomega = 1;
 
 int LAM, HEX;
 

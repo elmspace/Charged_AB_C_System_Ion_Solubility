@@ -122,12 +122,13 @@ double FreeEnergy( ){
       fEchi/=(2.0*((Nx*dxy[0])*(Ny*dxy[1])));
       fEW/=((Nx*dxy[0])*(Ny*dxy[1]));
 
+      
       // Calculating the homogenous free energy
       fE_homogenous=homogenousfE(chiMatrix);
       
       fES=((pAave+pBave))*log(QAB/(pAave+pBave))+NAB*pIave*log(QI/pIave);
-      
-      currentfE=-fES-fEW+fEchi+fE_charge+fESurf;
+    
+      currentfE=-fES-fEW+fEchi+fE_charge+fESurf-fE_homogenous;
 
       // Calculating the difference in free energy (now-previous)
       deltafE=fabs(currentfE-oldfE);

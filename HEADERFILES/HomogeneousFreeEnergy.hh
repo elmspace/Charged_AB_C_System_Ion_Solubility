@@ -18,7 +18,7 @@ double homogenousfE(double **chiMatrix){
     }
   }
 
-  fE_homo+=((pAave+pBave)/NAB)*log(pAave+pBave)+pIave*log(pIave);
+  fE_homo+=(pAave+pBave)*log(pAave+pBave)+NAB*pIave*log(pIave);
     
   destroy_1d_double_array(avphi);
 

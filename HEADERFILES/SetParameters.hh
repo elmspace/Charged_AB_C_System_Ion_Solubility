@@ -3,14 +3,6 @@ void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, dou
   int i,j;
   double tt; // This is for convergence of BP solver
 
- 
-  // Dielectric constants
-  kA=6.0;
-  kB=2.5;
-  
-  // Charge percentage 1e-10 is 0
-  PA=1.0e-2;
-
   // This is for convering the BP solver
   tt=cos(Pi/Nx)+cos(Pi/Ny);
   converg=(8.0-sqrt(64.0-16.0*tt*tt))/(tt*tt);
@@ -38,7 +30,7 @@ void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, dou
   pAave=f;
   pBave=1.0-f;
   pIave=PA*pAave;
-
+  
   // Interaction parameters
   chi[0]=xAB;  //xAB
   chi[1]=0.0;  //xAI
