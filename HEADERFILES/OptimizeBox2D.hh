@@ -13,8 +13,8 @@ void size_adjust_2D_xy(double ***w, double ***phi, double **psi, double **eta, d
   box_fE=create_1d_double_array(8,"box_fE");
   dxy_temp=create_1d_double_array(3,"dxy_temp");
 
-  dely=0.01/Nx;
-  delx=0.01/Ny;
+  dely=0.1/Nx;
+  delx=0.1/Ny;
  
   l=0;
   for(i=-1;i<2;i++){

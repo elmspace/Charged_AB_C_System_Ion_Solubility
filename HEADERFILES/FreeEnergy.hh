@@ -1,4 +1,4 @@
-double FreeEnergy( ){
+void FreeEnergy( ){
 
   
   double  currentfE, oldfE, deltafE;  
@@ -6,7 +6,6 @@ double FreeEnergy( ){
   double  precision=1.0e-3; 
   double  QAB,QI; 
   double  fEW, fEchi, fES, fE_charge, fESurf, fE_homogenous; 
-  double  epsilon, gamma;
   double  **delphi;
   double  ***delW;
   double  ***newW;
@@ -24,16 +23,12 @@ double FreeEnergy( ){
 
   msg=1.0;
   oldfE=1.0e2;
-  std::ofstream outputFile("./fE.dat");
+  std::ofstream outputFile("./RESULTS/fE.dat");
   do{
   
     WaveVectors(k_vector,dxy);   //
     currentfE=0.0;
-    deltafE=0.0;
-  
-    epsilon=0.05; // del_phi
-    gamma=0.05; // del_w
-  
+    deltafE=0.0; 
     iter=0;  
     
     do{
@@ -51,11 +46,12 @@ double FreeEnergy( ){
       SOR(psi,diel_cons,phi,converg,dxy); // Solving the BP equation in here
       Incomp(eta,phi,delphi); // Calcuating the incompressibility
   
-
-
       // Writting some Phi and Omega Files on the go +++++++++++++++++++++++++++++++++++++++
-      Write_Omega(w);
-      Write_Phi(phi,psi,dxy);
+      if(iter%100==0){
+	Write_Omega(w);
+	Write_Phi(phi,psi,dxy);
+	std::cout<<iter<<" delfE="<<(currentfE)<<"   delW="<< deltaW<<std::endl;
+      }
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
       // Calculating the gradient in the x and y direction
@@ -86,74 +82,56 @@ double FreeEnergy( ){
 
       for(i=0;i<Nx;i++){
 	for(j=0;j<Ny;j++){
-	  
 	  for(ii=0;ii<ChainType;ii++){
 	    for(jj=0;jj<ChainType;jj++){
-	      
 	      newW[ii][i][j]+=((chiMatrix[ii][jj]*phi[jj][i][j]));
 	      fEchi+=phi[ii][i][j]*chiMatrix[ii][jj]*phi[jj][i][j]*dxy[0]*dxy[1];
-	      
-	    }
-	    
-	   
+	    } 
 	    if(ii==0){newW[ii][i][j]+=x_sub[0][i][j]+eta[i][j]-((12.0*Pi*kA)/tau)*(pow(slope_x[i][j],2)+pow(slope_y[i][j],2));}  //A
 	    if(ii==1){newW[ii][i][j]+=x_sub[1][i][j]+eta[i][j]-((12.0*Pi*kB)/tau)*(pow(slope_x[i][j],2)+pow(slope_y[i][j],2));}  //B
 	    if(ii==2){newW[ii][i][j]+=0.0;}  //I
-
-	    fEW+=(newW[ii][i][j]*phi[ii][i][j]*dxy[0]*dxy[1]);
-	    
+	    fEW+=(newW[ii][i][j]*phi[ii][i][j]*dxy[0]*dxy[1]);	    
 	    delW[ii][i][j]=newW[ii][i][j]-w[ii][i][j];
-	    deltaW+=fabs(delW[ii][i][j]);
-	    
-	  }
-      
+	    deltaW+=fabs(delW[ii][i][j]);	    
+	  }  
 	  newW[3][i][j]=NAB*psi[i][j];
-	  delW[3][i][j]=newW[3][i][j]-w[3][i][j];
-	  
+	  delW[3][i][j]=newW[3][i][j]-w[3][i][j];	  
 	  fESurf+=(x_sub[0][i][j]*phi[0][i][j]+x_sub[1][i][j]*phi[1][i][j])*dxy[0]*dxy[1];
 	  fEW+=(newW[3][i][j]*phi[3][i][j]*dxy[0]*dxy[1]); // here we add w_e * phi_e where w_e is psi
 	}
       }
-
-      // This is the average deltaW for checking
       deltaW/=(Nx*Ny);
-      // Dividing by volume
       fESurf/=((Nx*dxy[0])*(Ny*dxy[1]));
       fEchi/=(2.0*((Nx*dxy[0])*(Ny*dxy[1])));
       fEW/=((Nx*dxy[0])*(Ny*dxy[1]));
 
-      
       // Calculating the homogenous free energy
       fE_homogenous=homogenousfE(chiMatrix);
-      
+      // Entropy
       fES=((pAave+pBave))*log(QAB/(pAave+pBave))+NAB*pIave*log(QI/pIave);
-    
+      // Total Free energy
       currentfE=-fES-fEW+fEchi+fE_charge+fESurf-fE_homogenous;
-
       // Calculating the difference in free energy (now-previous)
       deltafE=fabs(currentfE-oldfE);
 
-      // Print out some results
-      //std::cout<<iter<<" delfE="<<(currentfE-fE_homogenous)<<"   delW="<< deltaW<<std::endl;
+      if(Test==1){
+	std::cout<<iter<<" delfE="<<(currentfE)<<"   delW="<< deltaW<<std::endl;
+      }
       
+      // Simple mixing	
       for(i=0;i<Nx;i++){
 	for(j=0;j<Ny;j++){
 	  for(chain=0;chain<ChainType+1;chain++){
-	    w[chain][i][j]+=(gamma*delW[chain][i][j]-epsilon*delphi[i][j]);
+	    w[chain][i][j]+=(omega_mix*delW[chain][i][j]-phi_mix*delphi[i][j]);
 	  }
 	}
       }
-
    
-   
-    }while((deltaW>precision)||(iter<500));
+    }while((deltaW>precision)||(iter<100));
 
-    //std::cout<<iter<<" delfE="<<(currentfE-fE_homogenous)<<"   delW="<< deltaW<<"   Lx="<<dxy[0]*Nx<<"   Ly="<<dxy[1]*Ny<<std::endl;
     outputFile <<dxy[0]*Nx<<" "<<dxy[1]*Ny<<" "<<currentfE<<" "<<fE_homogenous<<std::endl;    
-
     Free_Energy=oldfE;
-    
-    //size_adjust_1D_x(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub);
+    // Optimize the box
     size_adjust_2D_xy(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub);
 
     if((oldfE<currentfE)||(abs(oldfE-currentfE)<0.00001)){
@@ -184,7 +162,7 @@ double FreeEnergy( ){
   // ------------------------------------------------
 
 
-  return oldfE;
+  return;
   
   
 };

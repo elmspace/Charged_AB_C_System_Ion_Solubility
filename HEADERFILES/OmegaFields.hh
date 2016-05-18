@@ -22,10 +22,9 @@ void omega(double ***w){
 
     std::ifstream infile;
 
-    if(LAM==1){infile.open("./OMEGA/Initial/LAM.read");}
-    if(HEX==1){infile.open("./OMEGA/Initial/HEX.read");}
+    if(LAM==1){infile.open("./OMEGA/Initial/Lam.read");}
+    if(HEX==1){infile.open("./OMEGA/Initial/Hex.read");}
  
-      
     for(i=0;i<Nx;i++){
       for(j=0;j<Ny;j++){
 	infile >> ii >> jj >> w[0][i][j] >> w[1][i][j] >> w[2][i][j] >> w[3][i][j]; 
@@ -38,7 +37,7 @@ void omega(double ***w){
     if(LAM==1){
       for(i=0;i<Nx;i++){
 	for(j=0;j<Ny;j++){
-	  w[0][i][j]=-1.0*cos(2.0*Pi*i/Nx);
+	  w[0][i][j]=-1.0*cos(2.0*Pi*j/Ny);
 	}
       }
     }else if(HEX==1){

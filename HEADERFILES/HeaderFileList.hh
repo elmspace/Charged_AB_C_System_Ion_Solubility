@@ -24,3 +24,5 @@
 #include "./FreeEnergy.hh"
 #include "./SaveData.hh"
 #include "../MODS/MOD_main.hh"
+#include "../MODS/MOD1.hh"
+#include "../MODS/MOD2.hh"

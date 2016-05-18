@@ -20,7 +20,9 @@ int main(int argc, char* argv[]){
 
   InputArguments(argc,argv);
 
-  MOD_main( );
+  //MOD_main( );
+  //MOD1( );
+  MOD2( );
 
   Allocate(0);
   return 0;

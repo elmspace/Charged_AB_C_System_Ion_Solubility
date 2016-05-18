@@ -18,6 +18,8 @@ using namespace std;
 
 #define ChainType 3 // We will add the e type manually
 
+// For testing
+const int Test = 0;
 
 // Set to 1 to minimize box size and 0 to not
 const int box_min = 1;
@@ -26,7 +28,7 @@ const int box_min = 1;
 // 0 = ThinFilm Extran Field, fixed BC
 // 1 = External Electric Field in Bulk
 // 2 = No External Electric Field
-const int Psi_BC = 2;
+const int Psi_BC = 0;
 
 // 0=read 1=set manually 2=random
 const int  Iomega = 1;
@@ -42,7 +44,7 @@ double converg;
 double psi_bc_1;
 double psi_bc_2;
 double Free_Energy;
-double Lx,Ly;
+double Lx=0.0,Ly=0.0;
 
 fftw_plan forward_plan, inverse_plan;
 double *input_q, *transformed_q, *final_q;
@@ -64,9 +66,11 @@ double **k_vector;
 double *dxy;
 double ***x_sub;
 
-
+const double phi_mix = 0.05; // del_phi
+const double omega_mix = 0.05; // del_w
 
 // Paramteres defined to calculate tau ****
+#define someSmallNumb 1.0e-5
 #define Pi 3.14159
 #define Temp 400.0
 #define e 1.6e-19

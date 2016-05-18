@@ -8,8 +8,8 @@ void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, dou
   converg=(8.0-sqrt(64.0-16.0*tt*tt))/(tt*tt);
   
   // Potential difference *************************
-  psi_bc_1=deltaV;
-  psi_bc_2=0.0; // Will be kept at zero all the time
+  psi_bc_1=0.0;
+  psi_bc_2=deltaV; // Will be kept at zero all the time
 
   // This is the surface interaction with substrate if - then B is attracted to substrate, if + then A is attracted
   mu=0.0;
@@ -21,8 +21,8 @@ void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, dou
   NAB=Ns[0]+Ns[1];
 
   // Setting the Tau parameter from theory (relative length)
-  tau=(e*e)/(eps_0*K_Boltz*Temp*Kuhn); 
-
+  tau=(e*e)/(eps_0*K_Boltz*Temp*Kuhn);
+  
   // Fraction of A in diblock
   f=double(Ns[0]/NAB);
 
@@ -37,11 +37,26 @@ void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, dou
   chi[2]=0.0;  //xBI
   
   
-  // delta_x delta_y and delta_s
+  // delta_x delta_y and delta_s *************
   ds=1.0/NAB;
-  dxy[0]=(4.0)/Nx;
-  dxy[1]=(4.0)/Ny;
-
+  if(LAM==1){
+    if(Lx<someSmallNumb && Ly<someSmallNumb){
+      dxy[0]=(4.0)/Nx;
+      dxy[1]=(4.0)/Ny;
+    }else{
+      dxy[0]=(Lx)/Nx;
+      dxy[1]=(Ly)/Ny;
+    }
+  }else if(HEX==1){
+    if(Lx<someSmallNumb && Ly<someSmallNumb){
+      dxy[0]=(4.76)/Nx;
+      dxy[1]=(8.30)/Ny;
+    }else{
+      dxy[0]=(Lx)/Nx;
+      dxy[1]=(Ly)/Ny;
+    }
+  }
+  // *****************************************
   
   // Setting up the interaction matrix
   chiMatrix[0][0]=0.0;     // xAA
