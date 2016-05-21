@@ -50,7 +50,7 @@ void FreeEnergy( ){
       if(iter%100==0){
 	Write_Omega(w);
 	Write_Phi(phi,psi,dxy);
-	std::cout<<iter<<" delfE="<<(currentfE)<<"   delW="<< deltaW<<std::endl;
+	//std::cout<<iter<<" delfE="<<(currentfE)<<"   delW="<< deltaW<<std::endl;
       }
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -132,7 +132,8 @@ void FreeEnergy( ){
     outputFile <<dxy[0]*Nx<<" "<<dxy[1]*Ny<<" "<<currentfE<<" "<<fE_homogenous<<std::endl;    
     Free_Energy=oldfE;
     // Optimize the box
-    size_adjust_2D_xy(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub);
+    //size_adjust_2D_xy(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub);
+    size_adjust_1D_x(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub);
 
     if((oldfE<currentfE)||(abs(oldfE-currentfE)<0.00001)){
       msg=0.0;
@@ -151,6 +152,14 @@ void FreeEnergy( ){
 
   outputFile <<"END"<<std::endl;    
   outputFile.close();
+
+  if(LAM==1 && HEX==0){
+    Lx_Lam=Lx;
+    Ly_Lam=Ly;
+  }else if(LAM==0 && HEX==1){
+    Lx_Hex=Lx;
+    Ly_Hex=Ly;
+  }
 
 
   // Destroying the allocated memory ----------------

@@ -34,26 +34,26 @@ void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, dou
   // Interaction parameters
   chi[0]=xAB;  //xAB
   chi[1]=0.0;  //xAI
-  chi[2]=0.0;  //xBI
+  chi[2]=100.0;  //xBI
   
   
   // delta_x delta_y and delta_s *************
   ds=1.0/NAB;
   if(LAM==1){
-    if(Lx<someSmallNumb && Ly<someSmallNumb){
+    if(Lx_Lam<someSmallNumb && Ly_Lam<someSmallNumb){
       dxy[0]=(4.0)/Nx;
       dxy[1]=(4.0)/Ny;
     }else{
-      dxy[0]=(Lx)/Nx;
-      dxy[1]=(Ly)/Ny;
+      dxy[0]=(Lx_Lam)/Nx;
+      dxy[1]=(Ly_Lam)/Ny;
     }
   }else if(HEX==1){
-    if(Lx<someSmallNumb && Ly<someSmallNumb){
-      dxy[0]=(4.76)/Nx;
-      dxy[1]=(8.30)/Ny;
+    if(Lx_Hex<someSmallNumb && Ly_Hex<someSmallNumb){
+      dxy[0]=(4.0)/Nx;
+      dxy[1]=(6.5)/Ny;
     }else{
-      dxy[0]=(Lx)/Nx;
-      dxy[1]=(Ly)/Ny;
+      dxy[0]=(Lx_Hex)/Nx;
+      dxy[1]=(Ly_Hex)/Ny;
     }
   }
   // *****************************************

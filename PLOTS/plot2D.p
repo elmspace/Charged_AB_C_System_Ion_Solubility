@@ -2,8 +2,8 @@ reset
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Mac
-path_to_file = "/Users/ashkandehghan/Desktop/SCFT_CODES/Charged_AB_C_System_Ion_Solubility/PHI/phi2D.dat"
-
+#path_to_file = "/Users/ashkandehghan/Desktop/SCFT_CODES/Charged_AB_C_System_Ion_Solubility/PHI/phi2D.dat"
+path_to_file = "/home/elmspace/Desktop/SCFT_CODES/ION_SOLUBILITY/FARM/main1/PHI/phi2D.dat"
 ##++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 #set term postscript enhanced color
@@ -16,8 +16,8 @@ set palette model RGB
 set dgrid3d 32,32,1
 #set size square
 unset border
-unset xtics
-unset ytics
+#unset xtics
+#unset ytics
 #unset colorbox
 set pm3d flush begin ftriangles scansforward interpolate 10,5
 
@@ -31,4 +31,4 @@ set pm3d flush begin ftriangles scansforward interpolate 10,5
    set autoscale
 #set size square
    
-   splot path_to_file using 2:1:7
+   splot path_to_file using 2:1:3

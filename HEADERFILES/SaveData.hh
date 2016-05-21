@@ -7,7 +7,8 @@ void SaveData(int action){
       outputFile37 << std::endl;
       outputFile37.close();
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    }else if(HEX==1){
+    }
+    if(HEX==1){
       // Cleaning Generic output file
       std::ofstream outputFile37("./RESULTS/MOD_Hex.dat");
       outputFile37 << std::endl;
@@ -22,7 +23,8 @@ void SaveData(int action){
       outputFile37 <<Free_Energy<<" "<<deltaV<<" "<<PA<<" "<<xAB<<" "<<NA/NAB<<" "<<deltaV<<" "<<Lx<<" "<<Ly<<std::endl;
       outputFile37.close();
       // *********************************************
-    }else if(HEX==1){
+    }
+    if(HEX==1){
       // *********************************************
       // Writing data to a generic file
       std::ofstream outputFile37("./RESULTS/MOD_Hex.dat" , ios::app);

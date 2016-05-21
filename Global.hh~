@@ -31,7 +31,7 @@ const int box_min = 1;
 const int Psi_BC = 0;
 
 // 0=read 1=set manually 2=random
-const int  Iomega = 1;
+const int  Iomega = 0;
 
 int LAM, HEX;
 
@@ -45,6 +45,8 @@ double psi_bc_1;
 double psi_bc_2;
 double Free_Energy;
 double Lx=0.0,Ly=0.0;
+double Lx_Lam=0.0, Ly_Lam=0.0;
+double Lx_Hex=0.0, Ly_Hex=0.0;
 
 fftw_plan forward_plan, inverse_plan;
 double *input_q, *transformed_q, *final_q;

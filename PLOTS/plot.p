@@ -8,7 +8,9 @@ set yr [0.0 : 1.0]
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Mac
-path_to_file = "/Users/ashkandehghan/Desktop/SCFT_CODES/Charged_AB_C_System_Ion_Solubility/PHI/"
+#path_to_file = "/Users/ashkandehghan/Desktop/SCFT_CODES/Charged_AB_C_System_Ion_Solubility/PHI/"
+
+path_to_file = "/home/elmspace/Desktop/SCFT_CODES/ION_SOLUBILITY/FARM/main1/PHI/"
 
 ##++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -26,8 +28,8 @@ set autoscale
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Mac
-path_to_file = "/Users/ashkandehghan/Desktop/SCFT_CODES/Charged_AB_C_System_Ion_Solubility/PHI/"
-
+#path_to_file = "/Users/ashkandehghan/Desktop/SCFT_CODES/Charged_AB_C_System_Ion_Solubility/PHI/"
+path_to_file = "/home/elmspace/Desktop/SCFT_CODES/ION_SOLUBILITY/FARM/main1/PHI/"
 ##++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   
 plot path_to_file."phi1Dx.dat" using 1:7 w lp lw 3 lt 1
@@ -40,8 +42,8 @@ set autoscale
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Mac
-path_to_file = "/Users/ashkandehghan/Desktop/SCFT_CODES/Charged_AB_C_System_Ion_Solubility/PHI/"
-
+#path_to_file = "/Users/ashkandehghan/Desktop/SCFT_CODES/Charged_AB_C_System_Ion_Solubility/PHI/"
+path_to_file = "/home/elmspace/Desktop/SCFT_CODES/ION_SOLUBILITY/FARM/main1/PHI/"
 ##++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
    
