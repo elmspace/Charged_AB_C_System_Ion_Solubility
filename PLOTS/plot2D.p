@@ -1,9 +1,7 @@
 reset
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# Mac
-#path_to_file = "/Users/ashkandehghan/Desktop/SCFT_CODES/Charged_AB_C_System_Ion_Solubility/PHI/phi2D.dat"
-path_to_file = "/home/elmspace/Desktop/SCFT_CODES/ION_SOLUBILITY/FARM/main1/PHI/phi2D.dat"
+path_to_file = "./PHI/phi2D.dat"
 ##++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 #set term postscript enhanced color
@@ -14,7 +12,7 @@ set iso 100
 set samp 100
 set palette model RGB
 set dgrid3d 32,32,1
-#set size square
+set size square
 unset border
 #unset xtics
 #unset ytics
