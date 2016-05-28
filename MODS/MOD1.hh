@@ -20,6 +20,6 @@ void MOD1( ){
     std::cout<<"fE="<<Free_Energy<<"   xAB="<<xAB<<std::endl;
     
     xAB-=0.05;
-  }while(xAB>10.0);
+  }while(xAB>8.0);
 
 };
