@@ -1,6 +1,6 @@
 //#include </opt/sharcnet/fftw/3.3.2/intel/include/fftw3.h> // This is for Sharcnet                                                        
-//#include </usr/include/fftw3.h> // This is for use on Landua                                                                           
-#include </usr/local/include/fftw3.h> // This is for local use (My MacBookPro)
+#include </usr/include/fftw3.h> // This is for use on Landua                                                                           
+//#include </usr/local/include/fftw3.h> // This is for local use (My MacBookPro)
 
 
 #include <stdio.h>

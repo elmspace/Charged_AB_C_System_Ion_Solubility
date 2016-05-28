@@ -8,7 +8,7 @@ void MOD1( ){
   deltaV = 0.0;
   kA=6.0;
   kB=2.5;
-  PA=4.0e-2;
+  PA=1.0e-2;
 
   omega(w);
   do{
