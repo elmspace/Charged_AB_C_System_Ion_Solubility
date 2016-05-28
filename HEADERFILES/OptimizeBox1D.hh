@@ -56,7 +56,7 @@ void size_adjust_1D_x(double ***w, double ***phi, double **psi, double **eta, do
     dxy[0]=dxy[0];
     dxy[1]=dxy[1]+box_y[1];
   }else{
-    cout<<"Something doesnt make sense!"<<endl;
+    
   }
   
 

@@ -5,7 +5,8 @@ void SOR(double **psi, double **diel_cons, double ***phi , double converg, doubl
 
   double **a0,**a1,**a2,**a3,**a4;
   double      **charge;
-  double avg_psi,avg_psi_old;
+  double avg_psi,avg_psi_old=10000.0;
+  double conv1=10000.0,conv2=10000.0;
 
 
   a0=create_2d_double_array(Nx,Ny,"a0");
@@ -29,17 +30,12 @@ void SOR(double **psi, double **diel_cons, double ***phi , double converg, doubl
   Set_a_arrays(diel_cons,a0,a1,a2,a3,a4,dxy);
   
  
-  
-  
-  if(Psi_BC==0){
+  for(s=0;s<100000;s++){
     
-    avg_psi_old=1000.0;
-    for(s=0;s<10000;s++){
-      
+    if(Psi_BC==0){
       avg_psi=0.0;
       for(i=0;i<Nx;i++){
 	for(j=0;j<Ny;j++){
-	  
 	  if(i==0){
 	    psi[i][j]=psi_bc_1;
 	  }else if(i==(Nx-1)){
@@ -52,25 +48,14 @@ void SOR(double **psi, double **diel_cons, double ***phi , double converg, doubl
 	    }else{
 	      psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i+1][j]+a2[i][j]*psi[i][j+1]+a3[i][j]*psi[i-1][j]+a4[i][j]*psi[i][j-1]+charge[i][j])-(converg*psi[i][j]);
 	    }
-	  }
-	  
+	  }	  
 	  avg_psi+=psi[i][j]/(Nx*Ny);
 	}
       }
-      
-      if(abs(avg_psi_old-avg_psi)<1.0e-4){break;}
-      avg_psi_old=avg_psi;
-    }
-    
-  }else if(Psi_BC==1){
-    
-    avg_psi_old=1000.0;
-    for(s=0;s<10000;s++){
-      
+    }else if(Psi_BC==1){
       avg_psi=0.0;
       for(i=0;i<Nx;i++){
 	for(j=0;j<Ny;j++){
-	  
 	  if((i==0)&&(j==0)){//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i+1][j]+a2[i][j]*psi[i][j+1]+a3[i][j]*psi[i][j]+a4[i][j]*psi[i][j]+charge[i][j])-(converg*psi[i][j]);
 	    psi[i][j]+=psi_bc_1;
@@ -96,24 +81,13 @@ void SOR(double **psi, double **diel_cons, double ***phi , double converg, doubl
 	  }else{
 	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i+1][j]+a2[i][j]*psi[i][j+1]+a3[i][j]*psi[i-1][j]+a4[i][j]*psi[i][j-1]+charge[i][j])-(converg*psi[i][j]);
 	  }
-	  
 	  avg_psi+=psi[i][j]/(Nx*Ny);
 	}
       }
-      
-      if(abs(avg_psi_old-avg_psi)<1.0e-4){break;}
-      avg_psi_old=avg_psi;
-    }
-    
-  }else if(Psi_BC==2){
-    
-    avg_psi_old=1000.0;
-    for(s=0;s<10000;s++){
-      
+    }else if(Psi_BC==2){
       avg_psi=0.0;
       for(i=0;i<Nx;i++){
 	for(j=0;j<Ny;j++){
-	  
 	  if((i==0)&&(j==0)){//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i+1][j]+a2[i][j]*psi[i][j+1]+a3[i][j]*psi[i][j]+a4[i][j]*psi[i][j]+charge[i][j])-(converg*psi[i][j]);
 	  }else if((i==0)&&(j==(Ny-1))){//++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -133,19 +107,28 @@ void SOR(double **psi, double **diel_cons, double ***phi , double converg, doubl
 	  }else{
 	    psi[i][j]=psi[i][j]+(converg/a0[i][j])*(a1[i][j]*psi[i+1][j]+a2[i][j]*psi[i][j+1]+a3[i][j]*psi[i-1][j]+a4[i][j]*psi[i][j-1]+charge[i][j])-(converg*psi[i][j]);
 	  }
-	  
 	  avg_psi+=psi[i][j]/(Nx*Ny);
 	}
       }
-      
-      if(abs(avg_psi_old-avg_psi)<1.0e-4){break;}
-      avg_psi_old=avg_psi;
+    }else{
+      std::cout<<"The boundary condition chosen for the electric field is not valid!"<<std::endl;
+      exit(0);
     }
-    
-  }else{
-    std::cout<<"The boundary condition chosen for the electric field is not valid!"<<std::endl;
-    exit(0);
+
+    // **************************************************************************************************
+    conv1=abs(avg_psi_old-avg_psi);
+    //std::cout<<s<<" "<<abs(avg_psi_old-avg_psi)<<" "<<abs(conv1-conv2)<<std::endl;
+    if((abs(conv1-conv2)<1.0e-10) && s>1000){break;}
+    avg_psi_old=avg_psi;
+    conv2=conv1;
+    // **************************************************************************************************
   }
+  
+  //exit(0);
+  //if(abs(avg_psi_old-avg_psi)>1.0e-5){
+  //std::cout<<"the PB did not converege!"<<std::endl;
+  //exit(0);
+  //}
   
   // Destroying the allocated memory ---------------------
   destroy_2d_double_array(a0);

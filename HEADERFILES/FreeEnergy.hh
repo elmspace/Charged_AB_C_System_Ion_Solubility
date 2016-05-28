@@ -132,8 +132,8 @@ void FreeEnergy( ){
     outputFile <<dxy[0]*Nx<<" "<<dxy[1]*Ny<<" "<<currentfE<<" "<<fE_homogenous<<std::endl;    
     Free_Energy=oldfE;
     // Optimize the box
-    //size_adjust_2D_xy(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub);
-    size_adjust_1D_x(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub);
+    size_adjust_2D_xy(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub);
+    //size_adjust_1D_x(w,phi,psi,eta,diel_cons,Ns,ds,k_vector,chi,dxy,chiMatrix,x_sub);
 
     if((oldfE<currentfE)||(abs(oldfE-currentfE)<0.00001)){
       msg=0.0;

@@ -6,7 +6,7 @@ void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, dou
   // This is for convering the BP solver
   tt=cos(Pi/Nx)+cos(Pi/Ny);
   converg=(8.0-sqrt(64.0-16.0*tt*tt))/(tt*tt);
-  
+ 
   // Potential difference *************************
   psi_bc_1=0.0;
   psi_bc_2=deltaV; // Will be kept at zero all the time
@@ -34,15 +34,15 @@ void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, dou
   // Interaction parameters
   chi[0]=xAB;  //xAB
   chi[1]=0.0;  //xAI
-  chi[2]=100.0;  //xBI
+  chi[2]=0.0;  //xBI
   
   
   // delta_x delta_y and delta_s *************
   ds=1.0/NAB;
   if(LAM==1){
     if(Lx_Lam<someSmallNumb && Ly_Lam<someSmallNumb){
-      dxy[0]=(4.0)/Nx;
-      dxy[1]=(4.0)/Ny;
+      dxy[0]=(3.8)/Nx;
+      dxy[1]=(3.8)/Ny;
     }else{
       dxy[0]=(Lx_Lam)/Nx;
       dxy[1]=(Ly_Lam)/Ny;

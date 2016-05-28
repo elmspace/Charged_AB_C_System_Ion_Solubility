@@ -28,10 +28,10 @@ const int box_min = 1;
 // 0 = ThinFilm Extran Field, fixed BC
 // 1 = External Electric Field in Bulk
 // 2 = No External Electric Field
-const int Psi_BC = 0;
+const int Psi_BC = 2;
 
 // 0=read 1=set manually 2=random
-const int  Iomega = 1;
+const int  Iomega = 0;
 
 int LAM, HEX;
 
