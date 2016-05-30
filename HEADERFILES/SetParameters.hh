@@ -33,7 +33,7 @@ void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, dou
   
   // Interaction parameters
   chi[0]=xAB;  //xAB
-  chi[1]=100.0;  //xAI
+  chi[1]=50.0;  //xAI
   chi[2]=0.0;  //xBI
   
   

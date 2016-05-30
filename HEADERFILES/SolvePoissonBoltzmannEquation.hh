@@ -124,11 +124,11 @@ void SOR(double **psi, double **diel_cons, double ***phi , double converg, doubl
     // **************************************************************************************************
   }
   
-  //exit(0);
-  //if(abs(avg_psi_old-avg_psi)>1.0e-5){
-  //std::cout<<"the PB did not converege!"<<std::endl;
-  //exit(0);
-  //}
+  
+  if((abs(conv1-conv2)>1.0e-10)){
+    std::cout<<"the PB did not converege!"<<std::endl;
+    exit(0);
+  }
   
   // Destroying the allocated memory ---------------------
   destroy_2d_double_array(a0);
