@@ -12,6 +12,10 @@ using namespace std;
   Input:
   [1]-> Phase: LAM or HEX
   [2]-> xAB
+  [3]-> xAI
+  [4]-> xBI
+  [5]-> NA
+  [6]-> PA
 */
 
 int main(int argc, char* argv[]){

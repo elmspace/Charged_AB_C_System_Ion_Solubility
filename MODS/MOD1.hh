@@ -4,11 +4,10 @@ void MOD1( ){
 
   SaveData(0);
   
-  NA = 50;
   deltaV = 0.0;
   kA=6.0;
   kB=2.5;
-  PA=4.0e-2;
+  PA=ChargeDensity;
 
   omega(w);
   do{
@@ -18,8 +17,8 @@ void MOD1( ){
     SaveData(1);
     
     std::cout<<"fE="<<Free_Energy<<"   xAB="<<xAB<<std::endl;
-    
-    xAB-=0.05;
-  }while(xAB>8.0);
+  
+    xAB-=0.01;
+  }while(xAB>5.0);
 
 };

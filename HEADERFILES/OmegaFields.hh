@@ -27,7 +27,11 @@ void omega(double ***w){
  
     for(i=0;i<Nx;i++){
       for(j=0;j<Ny;j++){
-	infile >> ii >> jj >> w[0][i][j] >> w[1][i][j] >> w[2][i][j] >> w[3][i][j]; 
+	if(NA<=50){
+	  infile >> ii >> jj >> w[0][i][j] >> w[1][i][j] >> w[2][i][j] >> w[3][i][j];
+	}else{
+	  infile >> ii >> jj >> w[1][i][j] >> w[0][i][j] >> w[2][i][j] >> w[3][i][j];
+	}
       }
     }
     infile.close();

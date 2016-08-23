@@ -31,7 +31,7 @@ set pm3d flush begin ftriangles scansforward interpolate 10,5
    
 #x, y, phiA, phiB, phiI, pA_charge, total_charge_per_r V
 
-   splot path_to_file using 2:1:8
+   splot path_to_file using 2:1:3
 
 pause(-1)
 

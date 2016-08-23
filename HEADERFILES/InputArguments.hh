@@ -16,8 +16,14 @@ void InputArguments(int numb_of_args, char* arg_input[]){
   }
 
 
-  xAB=atoi(arg_input[2]);
+  xAB=atof(arg_input[2]);
 
-  
+  xAI=atof(arg_input[3]);
+
+  xBI=atof(arg_input[4]);
+
+  NA=atoi(arg_input[5]);
+
+  ChargeDensity=atof(arg_input[6]);
 
 };

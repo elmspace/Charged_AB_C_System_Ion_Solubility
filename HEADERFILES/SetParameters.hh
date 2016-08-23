@@ -33,9 +33,8 @@ void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, dou
   
   // Interaction parameters
   chi[0]=xAB;  //xAB
-  chi[1]=50.0;  //xAI
-  chi[2]=0.0;  //xBI
-  
+  chi[1]=xAI;  //xAI
+  chi[2]=xBI;  //xBI  
   
   // delta_x delta_y and delta_s *************
   ds=1.0/NAB;
@@ -88,4 +87,16 @@ void parametersAB(double *chi, double f, double &ds, double *Ns,double *dxy, dou
     }
   }
 
+  std::cout<<"_______________________________________"<<std::endl;
+
+  std::cout<<"xAB= "<<xAB<<std::endl;
+  std::cout<<"xAI= "<<xAI<<std::endl;
+  std::cout<<"xBI= "<<xBI<<std::endl;
+  std::cout<<"fA= "<<((double)NA/double(Ns[0] + Ns[1]))<<std::endl;
+  std::cout<<"PA= "<<PA<<std::endl;
+  std::cout<<"_______________________________________"<<std::endl;
+
+
+
+  
 };

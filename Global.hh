@@ -1,6 +1,6 @@
 //#include </opt/sharcnet/fftw/3.3.2/intel/include/fftw3.h> // This is for Sharcnet                                                        
-#include </usr/include/fftw3.h> // This is for use on Landua                                                                           
-//#include </usr/local/include/fftw3.h> // This is for local use (My MacBookPro)
+//#include </usr/include/fftw3.h> // This is for use on Landua                                                                           
+#include </usr/local/include/fftw3.h> // This is for local use (My MacBookPro)
 
 
 #include <stdio.h>
@@ -35,6 +35,7 @@ const int  Iomega = 0;
 
 int LAM, HEX;
 
+double ChargeDensity = 1.0e-20;
 double tau; // This is the tau from the theory
 double mu; // Surface interaction
 double NAB,f,pot_diff;
@@ -52,7 +53,7 @@ fftw_plan forward_plan, inverse_plan;
 double *input_q, *transformed_q, *final_q;
 
 int i_fftw;
-double xAB;
+double xAB, xAI = 0.0, xBI = 0.0;
 int NA;
 double deltaV;
 double ***w;
@@ -68,8 +69,8 @@ double **k_vector;
 double *dxy;
 double ***x_sub;
 
-const double phi_mix = 0.05; // del_phi
-const double omega_mix = 0.05; // del_w
+const double phi_mix = 0.02; // del_phi
+const double omega_mix = 0.02; // del_w
 
 // Paramteres defined to calculate tau ****
 #define someSmallNumb 1.0e-5
